@@ -33,9 +33,9 @@ public class Actor {
     }
 
     public void applyEffect(HitEffect effect) {
-        this.hp -= effect.getHpDamage();
-        this.speed += effect.getSpeedChange();
-        this.armorPoints -= effect.getArmorDamage();
+        this.hp -= effect.hpDamage();
+        this.speed += effect.speedChange();
+        this.armorPoints -= effect.armorDamage();
     }
 
     public void applyHealing(Healing healing) {
@@ -50,13 +50,13 @@ public class Actor {
         }
 
         double before = this.hp;
-        this.hp += healing.getHealthGained();
+        this.hp += healing.healthGained();
         if (this.hp > maxHP) {
             this.hp = maxHP;
         }
 
         healingInventory.put(healing, healingInventory.get(healing) - 1);
-        System.out.println("Gained " + (this.hp - before) + " health from " + healing.getName());
+        System.out.println("Gained " + (this.hp - before) + " health from " + healing.name());
     }
 
     public void addWeaponToInventory(Weapon weapon) {
