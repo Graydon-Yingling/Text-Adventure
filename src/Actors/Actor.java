@@ -30,9 +30,9 @@ public class Actor {
     }
 
     public void applyEffect(HitEffect effect) {
-        this.hp -= effect.getHpDamage();
-        this.speed += effect.getSpeedChange();
-        this.armorPoints -= effect.getArmorDamage();
+        this.hp -= effect.hpDamage();
+        this.speed += effect.speedChange();
+        this.armorPoints -= effect.armorDamage();
     }
 
     public void applyHealing(Healing healing) {
@@ -47,13 +47,13 @@ public class Actor {
         }
 
         double before = this.hp;
-        this.hp += healing.getHealthGained();
+        this.hp += healing.healthGained();
         if (this.hp > maxHP) {
             this.hp = maxHP;
         }
 
         healingInventory.put(healing, healingInventory.get(healing) - 1);
-        System.out.println("Gained " + (this.hp - before) + " health from " + healing.getName());
+        System.out.println("Gained " + (this.hp - before) + " health from " + healing.name());
     }
 
     public void addWeaponToInventory(Weapon weapon) {
@@ -64,8 +64,9 @@ public class Actor {
         armorInventory.add(armor);
     }
 
-    public void addHealingToInventory (Healing heal) {
-        healingInventory.put(heal, healingInventory.getOrDefault(heal, 0) + 1); //getOrDefault() method comes from ChatGPT
+    public void addHealingToInventory (Healing heal, int amnt) {
+        int current = healingInventory.getOrDefault(heal, 0);//getOrDefault() method comes from ChatGPT
+        healingInventory.put(heal, current + amnt);
     }
 
     public void equipWeapon(Weapon weapon) {
@@ -77,7 +78,7 @@ public class Actor {
     public void equipArmor(Armor armor) {
         if (armorInventory.contains(armor)) {
             this.equippedArmor = armor;
-            this.armorPoints += armor.getArmorPoints();
+            this.armorPoints += armor.armorPoints();
         }
     }
 

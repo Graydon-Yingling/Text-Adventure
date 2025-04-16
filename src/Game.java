@@ -20,6 +20,7 @@ public class Game {
         Actor actor = null;
         Weapon weapon = null;
         Armor armor = null;
+        Healing healing = null;
 
         int choice = 0;
         while (choice != 1 && choice != 2) {
@@ -29,9 +30,11 @@ public class Game {
                 actor = new Actor("Warrior", 20, 100, 0);
                 weapon = new Weapon("Long Sword", 5, new HitEffect("Armor Piercing", 0, 2, 0));
                 armor = new Armor("Iron Armor", 5);
+                healing = new Healing("Cooked Meat", 5, 2, 0);
 
                 actor.addWeaponToInventory(weapon);
                 actor.addArmorToInventory(armor);
+                actor.addHealingToInventory(healing, 2);
 
                 actor.equipWeapon(weapon);
                 actor.equipArmor(armor);
@@ -39,11 +42,13 @@ public class Game {
                 actor = new Actor("Wizard", 15, 100, 0);
                 weapon = new Weapon("Magic Staff", 6, new HitEffect("Stun", 0, 0, -100));
                 armor = new Armor("Cloak", 0);
+                healing = new Healing("Healing Potion", 7, 1, 1);
 
                 actor.addWeaponToInventory(weapon);
-                actor.equipWeapon(weapon);
-
                 actor.addArmorToInventory(armor);
+                actor.addHealingToInventory(healing, 2);
+
+                actor.equipWeapon(weapon);
                 actor.equipArmor(armor);
             }else {
                 System.out.println("Oops! Please type either a 1 or a 2");
@@ -55,8 +60,8 @@ public class Game {
         System.out.println("You have chosen " + actor.getName() + "!");
         System.out.println();
         System.out.println("Equipped Items: ");
-        System.out.println(" - " + actor.getEquippedWeapon().getName());
-        System.out.println(" - " + actor.getEquippedArmor().getName());
+        System.out.println(" - " + actor.getEquippedWeapon().name());
+        System.out.println(" - " + actor.getEquippedArmor().name());
         System.out.println();
         System.out.println("Inventory:");
         displayInventory(actor);
@@ -65,11 +70,17 @@ public class Game {
     public static void displayInventory(Actor actor) {
         System.out.println(" - Weapons:");
         for (Weapon weapon : actor.getWeaponInventory()) {
-            System.out.println("  ~ " + weapon.getName());
+            System.out.println("  ~ " + weapon.name());
         }
         System.out.println(" - Armor:");
         for (Armor armor : actor.getArmorInventory()) {
-            System.out.println("  ~ " + armor.getName());
+            System.out.println("  ~ " + armor.name());
+        }
+        System.out.println(" - Healing Items:");
+        for (Map.Entry<Healing, Integer> healing : actor.getHealingInventory().entrySet()) {
+            Healing entry = healing.getKey();
+            int count = healing.getValue();
+            System.out.println("  ~ " + entry.name() + " x" + count);
         }
     }
 }
