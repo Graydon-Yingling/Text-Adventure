@@ -27,3 +27,7 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+
+### Project Files ###
+.idea/
+src/Text Files/story.txt
