@@ -1,29 +1,6 @@
 package Healing;
 
-import Effects.HitEffect;
-
-import java.util.Objects;
-
-public class Healing {
-    private final String name;
-    private final double healthGained;
-    private final int reserveHp;
-    private final int tempArmor;
-
-    public Healing(String name, double healthGained, int reserveHp, int tempArmor) {
-        this.name = name;
-        this.healthGained = healthGained;
-        this.reserveHp = reserveHp;
-        this.tempArmor = tempArmor;
-    }
-
-    public String getName() {return name;}
-
-    public double getHealthGained() {return healthGained;}
-
-    public int getReserveHp() {return reserveHp;}
-
-    public int getTempArmor() {return tempArmor;}
+public record Healing(String name, double healthGained, int reserveHp, int tempArmor) {
 
     @Override
     public boolean equals(Object obj) {
@@ -37,8 +14,4 @@ public class Healing {
                 this.tempArmor == other.tempArmor;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(name, healthGained, reserveHp, tempArmor);
-    }
 }
