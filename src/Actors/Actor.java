@@ -5,24 +5,21 @@ import Effects.HitEffect;
 import Healing.Healing;
 import Weapons.Weapon;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class Actor {
     private final String name;
     private double hp;
     private double speed;
     private double armorPoints;
-    private double maxHP;
+    private final double maxHP;
 
     private Weapon equippedWeapon;
     private Armor equippedArmor;
 
-    private Set<Weapon> weaponInventory = new HashSet<>();
-    private Set<Armor> armorInventory = new HashSet<>();
-    private Map<Healing, Integer> healingInventory = new HashMap<>();
+    private final Set<Weapon> weaponInventory = new HashSet<>();
+    private final Set<Armor> armorInventory = new HashSet<>();
+    private final Map<Healing, Integer> healingInventory = new HashMap<>();
 
     public Actor(String name, double hp, double speed, double armor) {
         this.name = name;
@@ -80,7 +77,28 @@ public class Actor {
     public void equipArmor(Armor armor) {
         if (armorInventory.contains(armor)) {
             this.equippedArmor = armor;
+            this.armorPoints += armor.getArmorPoints();
         }
+    }
+
+    public Weapon getEquippedWeapon() {
+        return equippedWeapon;
+    }
+
+    public Armor getEquippedArmor() {
+        return equippedArmor;
+    }
+
+    public Set<Weapon> getWeaponInventory() {
+        return weaponInventory;
+    }
+
+    public Set<Armor> getArmorInventory() {
+        return armorInventory;
+    }
+
+    public Map<Healing, Integer> getHealingInventory() {
+        return healingInventory;
     }
 
     public String getName() {return name;}
