@@ -1,0 +1,17 @@
+1. Longsword:
+    - 4 damage
+    - 2 "Armor Piercing"
+2. Daggers:
+    - 3 damage
+    - 20% chance to inflict "Bleed" for 2 turns
+3. Magic Staff:
+    - 6 damage
+    - 10% chance to "Stun" an enemy
+4. Short sword:
+    - 4 damage
+    - 15% chance to inflict "Weak Spot"
+5. Mace:
+    - 6 damage
+    - 3 "Armor Piercing"
+
+PLEASE SEE 'EFFECTS' FILE FOR MORE INFO

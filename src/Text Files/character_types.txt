@@ -1,0 +1,35 @@
+1. Warrior:
+    - 20 HP
+    - Passive Ability: Battle Hardened
+        ~ The Warrior shakes off negative effects one turn earlier that other characters
+    - Special Ability: Warrior Spirit
+        ~ Once per fight, the Warrior may gain "Strength" for 2 turns
+    - Starting Equipment:
+        ~ Longsword
+        ~ Iron Armor
+        ~ 2 Cooked Meat
+
+2. Rogue:
+    - 15 HP
+    - Passive Ability: Perceptive
+        ~ The Rogue has an increased chance to find items while searching/looting
+    - Special Ability: Finesse
+        ~ Once per fight, the Rogue gains "Agility" for 3 turns
+    - Starting Equipment:
+        ~ Twin Daggers
+        ~ Leather Tunic
+        ~ 3 Apples
+
+3. Wizard:
+    - 15 HP
+    - Passive Ability: Healing Aura
+        ~ The Wizard can choose to not attack, and instead gain 3 HP per turn spent resting.
+          They also recover 1 HP for every action they make while out of combat
+    - Special Ability: Blind
+        ~ Once per fight, the Wizard may inflict "Blindness" on an enemy for 2 turns
+    - Starting Equipment:
+        ~ Magic Staff
+        ~ Cloak
+        ~ 2 Healing Potions
+
+PLEASE SEE 'EFFECTS', 'WEAPONS', 'HEALING', and 'ARMOR' FILES FOR MORE INFORMATION

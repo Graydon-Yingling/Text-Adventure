@@ -1,0 +1,22 @@
+1. Apples:
+    - 3 Healing
+    - 1 max in reserve
+    - 0 temporary armor
+2. Cooked Meat:
+    - 5 Healing
+    - 2 max in reserve
+    - 0 temporary armor
+3. Healing Potions:
+    - 7 Healing
+    - 1 max in reserve
+    - 1 temporary armor
+4. Great Healing Potions:
+    - Restores half of a characters max health
+    - 0 in reserve
+    - 2 temporary armor
+5. Max Healing Potions:
+    - Restores a characters full health
+    - 0 in reserve
+    - 3 temporary armor
+
+PLEASE SEE 'EFFECTS' FILE FOR MORE INFORMATION

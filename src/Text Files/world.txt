@@ -1,0 +1,45 @@
+1. Starting location:
+    - Small town with a usable shop and small tavern
+    - Places for exploration (houses)
+    - No enemies
+
+2. Forests:
+    - Dense with trees
+    - Places for exploration (open areas, contains caves and grass patches)
+    - Types of Potential Creatures:
+        ~ Tree Creatures, Hounds, Roamers, Wolves, Bears, Hatchlings, Bears
+
+3. Caves:
+    - Dark and rocky
+    - Places for exploration
+    - Types of Potential Creatures:
+        ~ Stone Golems, Brutes, Drakes, Adults, Bears
+
+4. Grass Patches:
+    - Open fields
+    - Places for exploration
+    - Types of Potential Creatures
+        ~ Wolves, Hatchlings, Drakes, Hounds
+
+5. Mountains:
+    - Rocky and covered with trees
+    - No places for exploration on the surface, but lead into caves
+    - Types of Potential Creatures:
+        ~ Tree Creature, Stone Golems, Hounds, Wolves, Bears, Hatchlings,
+          Drakes, Adults
+
+6. Cities:
+    - Shops, taverns, and blacksmiths
+    - Places for exploration
+    - No enemies
+
+Buildings and their usages:
+
+    - 1. Taverns:
+        ~ Used to recover health and purchase foods
+
+    - 2. Shops:
+        ~ Used to purchase various items
+
+    - 3. Blacksmiths:
+        ~ Used to purchase weapons and armor

@@ -1,0 +1,47 @@
+1. Nature Beings:
+    - Tree Creature:
+        ~ 10 HP
+        ~ 4 Damage
+        ~ 15% chance to inflict "Stun" for 1 turn
+    - Stone Golem:
+        ~ 20 HP
+        ~ 4 Damage
+        ~ 2 "Armor Piercing"
+
+2. Undead:
+    - 15% to inflict poison on hit
+    - Hounds:
+        ~ 10 HP
+        ~ 1 armor
+        ~ 2 Damage
+    - Roamers:
+        ~ 20 HP
+        ~ 2 Armor
+        ~ 3 Damage
+    - Brutes
+        ~ 25 HP
+        ~ 3 Armor
+        ~ 4 Damage
+
+3. Beasts:
+    - 15% chance to inflict bleed on hit
+    - Wolves:
+        ~ 12 HP
+        ~ 2 Damage
+    - Bears:
+        ~ 25 HP
+        ~ 5 Damage
+
+4. Dragons:
+    - Hatchlings:
+        ~ 8 HP
+        ~ 3 Damage
+        ~ 5% chance to inflict burn
+    - Drakes:
+        ~ 20 HP
+        ~ 5 Damage
+        ~ 15% chance to inflict burn
+    - Adults:
+        ~ 45 HP
+        ~ 12 Damage
+        ~ 30% chance to inflict burn

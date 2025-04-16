@@ -1,0 +1,14 @@
+Special for Healing Items:
+    1. Reserve HP: Extra 5 HP that a character can obtain past their max as a bonus from certain items
+    2. Temporary Armor: Similar to reserve HP; Adds a certain bonus armor to a character with no limit. Temporary armor
+       will also be used up first when a character is hit
+
+Others:
+    3. Blindness: Those with blindness have a 30% less chance to hit on their attacks
+    4. Agility: Those with  agility will have an extra 15% chance to dodge attacks
+    5. Strength: Those with strength will do an extra 50% damage on their attacks
+    6. Armor Piercing: Extra damage that will ignore armor if equipped by the enemy, or do extra HP damage otherwise
+    7. Bleed: Deals 10% damage for each turn the effect lasts
+    8. Stun: Removes ability to take a turn
+    9. Weak Spot: One with this effect will take double damage next attack
+    10. Poison: Deals 2% increasing damage for each turn the effect lasts

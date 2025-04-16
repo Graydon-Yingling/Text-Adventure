@@ -1,0 +1,12 @@
+1. Iron Armor:
+    - 5 armor
+
+2. Leather Armor:
+    - 3 armor
+
+3. Cloaks:
+    - 0 armor
+    - Looks cool
+
+4. Rotten Armor:
+    - 2 Armor
