@@ -10,6 +10,10 @@ public class Game {
     static Scanner input = new Scanner(System.in);
 
     public static void main(String[] args) {
+        gameStart();
+    }
+
+    public static void gameStart() {
         System.out.println("Welcome to the Game!");
         System.out.println();
         System.out.println("Please Choose Your Starting Character by typing the corresponding number:");
@@ -27,7 +31,7 @@ public class Game {
             choice = input.nextInt();
 
             if (choice == 1) {
-                actor = new Actor("Warrior", 20, 100, 0);
+                actor = new Actor("Warrior", 20, 80, 0);
                 weapon = new Weapon("Long Sword", 5, new HitEffect("Armor Piercing", 0, 2, 0));
                 armor = new Armor("Iron Armor", 5);
                 healing = new Healing("Cooked Meat", 5, 2, 0);
@@ -39,7 +43,7 @@ public class Game {
                 actor.equipWeapon(weapon);
                 actor.equipArmor(armor);
             }else if (choice == 2) {
-                actor = new Actor("Wizard", 15, 100, 0);
+                actor = new Actor("Wizard", 15, 85, 0);
                 weapon = new Weapon("Magic Staff", 6, new HitEffect("Stun", 0, 0, -100));
                 armor = new Armor("Cloak", 0);
                 healing = new Healing("Healing Potion", 7, 1, 1);
