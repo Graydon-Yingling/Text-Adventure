@@ -8,11 +8,6 @@ import java.util.*;
 
 public class Game {
     static Scanner input = new Scanner(System.in);
-
-    public static void main(String[] args) {
-        gameStart();
-    }
-
     public static void gameStart() {
         System.out.println("Welcome to the Game!");
         System.out.println();
