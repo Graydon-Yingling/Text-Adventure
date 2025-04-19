@@ -82,6 +82,23 @@ public class Actor {
         }
     }
 
+    public void displayInventory(Actor actor) {
+        System.out.println(" - Weapons:");
+        for (Weapon weapon : actor.getWeaponInventory()) {
+            System.out.println("  ~ " + weapon.name());
+        }
+        System.out.println(" - Armor:");
+        for (Armor armor : actor.getArmorInventory()) {
+            System.out.println("  ~ " + armor.name());
+        }
+        System.out.println(" - Healing Items:");
+        for (Map.Entry<Healing, Integer> healing : actor.getHealingInventory().entrySet()) {
+            Healing entry = healing.getKey();
+            int count = healing.getValue();
+            System.out.println("  ~ " + entry.name() + " x" + count);
+        }
+    }
+
     public Weapon getEquippedWeapon() {
         return equippedWeapon;
     }

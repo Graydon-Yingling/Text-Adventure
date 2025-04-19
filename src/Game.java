@@ -6,9 +6,12 @@ import Effects.*;
 
 import java.util.*;
 
+import static Actors.Actor.*;
+
 public class Game {
     static Scanner input = new Scanner(System.in);
-    public static void gameStart() {
+
+    public void gameStart() {
         System.out.println("Welcome to the Game!");
         System.out.println();
         System.out.println("Please Choose Your Starting Character by typing the corresponding number:");
@@ -50,7 +53,12 @@ public class Game {
                 actor.equipWeapon(weapon);
                 actor.equipArmor(armor);
             }else {
+                System.out.println();
                 System.out.println("Oops! Please type either a 1 or a 2");
+                System.out.println();
+                System.out.println("Please Choose Your Starting Character by typing the corresponding number:");
+                System.out.println("1. Warrior");
+                System.out.println("2. Wizard");
                 System.out.println();
             }
         }
@@ -59,27 +67,10 @@ public class Game {
         System.out.println("You have chosen " + actor.getName() + "!");
         System.out.println();
         System.out.println("Equipped Items: ");
-        System.out.println(" - " + actor.getEquippedWeapon().name());
-        System.out.println(" - " + actor.getEquippedArmor().name());
+        System.out.println(" Weapon: " + actor.getEquippedWeapon().name());
+        System.out.println(" Armor " + actor.getEquippedArmor().name());
         System.out.println();
         System.out.println("Inventory:");
-        displayInventory(actor);
-    }
-
-    public static void displayInventory(Actor actor) {
-        System.out.println(" - Weapons:");
-        for (Weapon weapon : actor.getWeaponInventory()) {
-            System.out.println("  ~ " + weapon.name());
-        }
-        System.out.println(" - Armor:");
-        for (Armor armor : actor.getArmorInventory()) {
-            System.out.println("  ~ " + armor.name());
-        }
-        System.out.println(" - Healing Items:");
-        for (Map.Entry<Healing, Integer> healing : actor.getHealingInventory().entrySet()) {
-            Healing entry = healing.getKey();
-            int count = healing.getValue();
-            System.out.println("  ~ " + entry.name() + " x" + count);
-        }
+        actor.displayInventory(actor);
     }
 }
