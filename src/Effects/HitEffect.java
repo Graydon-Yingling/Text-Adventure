@@ -1,6 +1,10 @@
 package Effects;
 
-public record HitEffect(String name, double hpDamage, double armorDamage, double speedChange) {
+public record HitEffect(String name, double hpDamage, double armorDamage, double speedChange, double effectChance) {
+
+    public boolean isApplied() {
+        return Math.random() <= this.effectChance;
+    }
 
     @Override
     public boolean equals(Object obj) {

@@ -82,17 +82,17 @@ public class Actor {
         }
     }
 
-    public void displayInventory(Actor actor) {
+    public void displayInventory() {
         System.out.println(" - Weapons:");
-        for (Weapon weapon : actor.getWeaponInventory()) {
+        for (Weapon weapon : this.getWeaponInventory()) {
             System.out.println("  ~ " + weapon.name());
         }
         System.out.println(" - Armor:");
-        for (Armor armor : actor.getArmorInventory()) {
+        for (Armor armor : this.getArmorInventory()) {
             System.out.println("  ~ " + armor.name());
         }
         System.out.println(" - Healing Items:");
-        for (Map.Entry<Healing, Integer> healing : actor.getHealingInventory().entrySet()) {
+        for (Map.Entry<Healing, Integer> healing : this.getHealingInventory().entrySet()) {
             Healing entry = healing.getKey();
             int count = healing.getValue();
             System.out.println("  ~ " + entry.name() + " x" + count);
