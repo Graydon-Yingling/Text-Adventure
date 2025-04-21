@@ -12,4 +12,5 @@ public interface Enemy {
     void applyEffect(HitEffect effect);
     void setHP(double hp);
     void setSpeed(double speed);
+    double getMaxSpeed();
 }

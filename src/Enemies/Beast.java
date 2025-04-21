@@ -8,6 +8,7 @@ public class Beast implements Enemy{
     private final double damage;
     private double hp;
     private double speed;
+    private double maxSpeed;
     private final HitEffect bleed = new HitEffect("Bleed", 2, 0, 0, 0.15);
 
     public Beast(String name, double hp, double damage, double speed) {
@@ -16,6 +17,7 @@ public class Beast implements Enemy{
         this.damage = damage;
         this.speed = speed;
         this.maxHP = hp;
+        this.maxSpeed = speed;
     }
 
     @Override
@@ -47,4 +49,7 @@ public class Beast implements Enemy{
 
     @Override
     public void setSpeed(double speed) {this.speed = speed;}
+
+    @Override
+    public double getMaxSpeed() {return maxSpeed;}
 }

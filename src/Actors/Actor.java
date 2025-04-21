@@ -11,6 +11,7 @@ public class Actor {
     private final String name;
     private double hp;
     private double speed;
+    private double maxSpeed;
     private double armorPoints;
     private final double maxHP;
 
@@ -25,23 +26,26 @@ public class Actor {
         this.name = name;
         this.hp = hp;
         this.speed = speed;
+        this.maxSpeed = speed;
         this.armorPoints = armor;
         this.maxHP = hp;
     }
 
     public void applyEffect(HitEffect effect) {
         this.hp -= effect.hpDamage();
-        this.speed += effect.speedChange();
-        this.armorPoints -= effect.armorDamage();
+        this.speed -= effect.speedChange();
+        this.hp -= effect.armorDamage();
     }
 
     public void applyHealing(Healing healing) {
         if (healingInventory.getOrDefault(healing, 0) <= 0) {
+            System.out.println();
             System.out.println("You don't have this healing item");
             return;
         }
 
         if (this.hp >= maxHP) {
+            System.out.println();
             System.out.println("You are already at max health");
             return;
         }
@@ -52,7 +56,13 @@ public class Actor {
             this.hp = maxHP;
         }
 
-        healingInventory.put(healing, healingInventory.get(healing) - 1);
+        int remaining = healingInventory.get(healing) - 1;
+        if (remaining <= 0) {
+            healingInventory.remove(healing);
+        } else {
+            healingInventory.put(healing, remaining);
+        }
+
         System.out.println("Gained " + (this.hp - before) + " health from " + healing.name());
     }
 
@@ -123,13 +133,17 @@ public class Actor {
 
     public double getHp() {return hp;}
 
+    public double getMaxHP() {return maxHP;}
+
     public double getSpeed() {return speed;}
 
     public double getArmor() {return armorPoints;}
 
     public void setHp(double hp) {this.hp = hp;}
 
-    public void setSpeed(int speed) {this.speed = speed;}
+    public void setSpeed(double speed) {this.speed = speed;}
+
+    public double getMaxSpeed() {return this.maxSpeed;}
 
     public void setArmor(double armorPoints) {this.armorPoints = armorPoints;}
 }
