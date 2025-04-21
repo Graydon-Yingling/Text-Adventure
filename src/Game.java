@@ -1,6 +1,7 @@
 import Armor.*;
 import Actors.*;
 import Healing.*;
+import Locations.Location;
 import Weapons.*;
 import Effects.*;
 import Enemies.*;
@@ -12,6 +13,7 @@ public class Game {
 
     private Actor player;
     private Enemy currentEnemy;
+    private Location currentLocation;
 
     public void gameStart() {
         System.out.println("Welcome to the Game!");
@@ -199,5 +201,14 @@ public class Game {
             player.setSpeed(player.getMaxSpeed());
             currentEnemy.setSpeed(currentEnemy.getMaxSpeed());
         }
+    }
+
+    public void enterLocation(Location currentLocation) throws InterruptedException {
+        this.currentLocation = currentLocation;
+        enter();
+    }
+
+    public void enter() throws InterruptedException {
+        currentLocation.enterLocation();
     }
 }
