@@ -97,13 +97,23 @@ public class Game {
                             System.out.println();
                             System.out.println("You attack and deal " + player.getEquippedWeapon().damage() + " damage!");
                             System.out.println();
-                            currentEnemy.setHP(currentEnemy.getHP() - player.getEquippedWeapon().damage());
+                            if (currentEnemy.getArmorPoints() > 0) {
+                                double currentArmor = currentEnemy.getArmorPoints();
+                                currentEnemy.setArmorPoints(currentEnemy.getArmorPoints() - player.getEquippedWeapon().damage());
+                                if (currentEnemy.getArmorPoints() < 0) {
+                                    currentEnemy.setArmorPoints(0);
+                                    currentEnemy.setHP(currentEnemy.getHP() - (player.getEquippedWeapon().damage() - currentArmor));
+                                }
+                            }else {
+                                currentEnemy.setHP(currentEnemy.getHP() - player.getEquippedWeapon().damage());
+                            }
                             if (player.getEquippedWeapon().effect().isApplied() && player.getEquippedWeapon().effect() != null) {
-                                System.out.println();
                                 currentEnemy.applyEffect(player.getEquippedWeapon().effect());
-                                System.out.println("You applied " + player.getEquippedWeapon().effect().name() + "!");
+                                System.out.println("You inflicted " + player.getEquippedWeapon().effect().name() + "!");
                                 System.out.println();
                             }
+                            System.out.println();
+                            System.out.println("The " + currentEnemy.getName() + " now has " + currentEnemy.getArmorPoints() + " armor and " + currentEnemy.getHP() + " HP!");
                         }else if (choice == 2) {
                             if (player.getHealingInventory().isEmpty()) {
                                 System.out.println();
@@ -166,13 +176,24 @@ public class Game {
                 System.out.println();
                 System.out.println("The " + currentEnemy.getName() + " attacks and does " + currentEnemy.getDamage() + " damage!");
                 System.out.println();
-                player.setHp(player.getHp() - currentEnemy.getDamage());
+                if (player.getArmorPoints() > 0) {
+                    double currentArmor = player.getArmorPoints();
+                    player.setArmorPoints(player.getArmorPoints() - currentEnemy.getDamage());
+                    if (player.getArmorPoints() < 0) {
+                        player.setArmorPoints(0);
+                        player.setHp(player.getHp() - (currentEnemy.getDamage() - currentArmor));
+                    }
+                }else {
+                    currentEnemy.setHP(currentEnemy.getHP() - player.getEquippedWeapon().damage());
+                }
                 if (currentEnemy.getEffect().isApplied() && currentEnemy.getEffect() != null) {
                     System.out.println();
                     player.applyEffect(currentEnemy.getEffect());
-                    System.out.println(currentEnemy.getName() + " applied " + currentEnemy.getEffect().name() + "!");
+                    System.out.println(currentEnemy.getName() + " inflicted " + currentEnemy.getEffect().name() + "!");
                     System.out.println();
                 }
+                System.out.println("You now have " + player.getArmorPoints() + " armor and " + player.getHp() + " HP!");
+                System.out.println();
             }
             playersTurn = !playersTurn;
             player.setSpeed(player.getMaxSpeed());

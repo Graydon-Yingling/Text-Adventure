@@ -137,7 +137,7 @@ public class Actor {
 
     public double getSpeed() {return speed;}
 
-    public double getArmor() {return armorPoints;}
+    public double getArmorPoints() {return armorPoints;}
 
     public void setHp(double hp) {this.hp = hp;}
 
@@ -145,5 +145,5 @@ public class Actor {
 
     public double getMaxSpeed() {return this.maxSpeed;}
 
-    public void setArmor(double armorPoints) {this.armorPoints = armorPoints;}
+    public void setArmorPoints(double armorPoints) {this.armorPoints = armorPoints;}
 }

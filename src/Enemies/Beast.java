@@ -9,6 +9,7 @@ public class Beast implements Enemy{
     private double hp;
     private double speed;
     private double maxSpeed;
+    private double armorPoints;
     private final HitEffect bleed = new HitEffect("Bleed", 2, 0, 0, 0.15);
 
     public Beast(String name, double hp, double damage, double speed) {
@@ -30,7 +31,7 @@ public class Beast implements Enemy{
     public String getName() {return name;}
 
     @Override
-    public double getArmor() {return 0;}
+    public double getArmorPoints() {return 0;}
 
     @Override
     public double getHP() {return hp;}
@@ -49,6 +50,11 @@ public class Beast implements Enemy{
 
     @Override
     public void setSpeed(double speed) {this.speed = speed;}
+
+    @Override
+    public void setArmorPoints(double armorPoints) {
+
+    }
 
     @Override
     public double getMaxSpeed() {return maxSpeed;}
