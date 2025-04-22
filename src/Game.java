@@ -186,7 +186,7 @@ public class Game {
                         player.setHp(player.getHp() - (currentEnemy.getDamage() - currentArmor));
                     }
                 }else {
-                    currentEnemy.setHP(currentEnemy.getHP() - player.getEquippedWeapon().damage());
+                    player.setHp(player.getHp() - currentEnemy.getDamage());
                 }
                 if (currentEnemy.getEffect().isApplied() && currentEnemy.getEffect() != null) {
                     System.out.println();

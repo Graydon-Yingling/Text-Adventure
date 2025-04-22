@@ -1,7 +1,7 @@
 import Enemies.Beast;
-import Locations.StartingTown;
+import Locations.*;
 
-import java.util.Scanner;
+import java.rmi.registry.LocateRegistry;
 
 public class Main {
     public static void main(String[] args) throws InterruptedException {
@@ -18,6 +18,6 @@ public class Main {
         game.startFight(new Beast("Wolf", 12, 2, 90));
         System.out.println();
         System.out.println("Whew! You now move towards the town");
-        game.enterLocation(new StartingTown());
+        game.enterLocation(LocationRegistry.get("The Clearing Outpost"));
     }
 }
