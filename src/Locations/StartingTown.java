@@ -1,9 +1,12 @@
 package Locations;
+import Actors.Actor;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class StartingTown implements Location{
+    static Scanner input = new Scanner(System.in);
 
     private boolean hasEntered = false;
 
@@ -11,7 +14,7 @@ public class StartingTown implements Location{
     public String getLocationName() {return "The Clearing Outpost";}
 
     @Override
-    public void enterLocation() throws InterruptedException {
+    public void enterLocation(Actor player) throws InterruptedException {
         if (hasEntered) {
             System.out.println();
             System.out.println("You enter The Clearing Outpost...");
@@ -22,6 +25,30 @@ public class StartingTown implements Location{
             System.out.println();
             System.out.println("At first glance, you notice a shop called 'The Broken Toe', a tavern named 'Tammy's Tavern', and some houses...with unlocked doors");
             this.hasEntered = true;
+        }
+        int choice = -1;
+        System.out.println();
+        while (choice < 1) {
+            System.out.println("What would you like to do?");
+            System.out.println(" 1. Tammy's Tavern");
+            System.out.println(" 2. The Broken Toe");
+            System.out.println();
+            if (input.hasNextInt()) {
+                choice = input.nextInt();
+                if (choice == 1) {
+                    LocationRegistry.get("Tammy's Tavern").enterLocation(player);
+                }else if (choice == 2) {
+                    LocationRegistry.get("The Broken Toe").enterLocation(player);
+                }else {
+                    System.out.println();
+                    System.out.println("Oops! Please enter a valid number...");
+                    choice = -1;
+                }
+            }else {
+                input.nextLine();
+                System.out.println();
+                System.out.println("Please enter a number...");
+            }
         }
     }
 

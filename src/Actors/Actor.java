@@ -75,7 +75,7 @@ public class Actor {
     }
 
     public void addHealingToInventory (Healing heal, int amnt) {
-        int current = healingInventory.getOrDefault(heal, 0);//getOrDefault() method comes from ChatGPT
+        int current = healingInventory.getOrDefault(heal, 0); // getOrDefault() method comes from ChatGPT
         healingInventory.put(heal, current + amnt);
     }
 

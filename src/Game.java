@@ -207,7 +207,7 @@ public class Game {
 
     public void enterLocation(Location currentLocation) throws InterruptedException {
         this.currentLocation = currentLocation;
-        currentLocation.enterLocation();
+        currentLocation.enterLocation(this.player);
     }
 
     public void locationInteraction() throws InterruptedException {
@@ -226,7 +226,7 @@ public class Game {
                 choice = input.nextInt();
                 if (choice > 0 && choice <= options.size()) {
                     currentLocation = LocationRegistry.get(options.get(choice - 1));
-                    currentLocation.enterLocation();
+                    currentLocation.enterLocation(this.player);
                 }else {
                     System.out.println();
                     System.out.println("Oops! Please enter a valid location...");
