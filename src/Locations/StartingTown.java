@@ -1,5 +1,6 @@
 package Locations;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class StartingTown implements Location{
@@ -22,11 +23,10 @@ public class StartingTown implements Location{
             System.out.println("At first glance, you notice a shop called 'The Broken Toe', a tavern named 'Tammy's Tavern', and some houses...with unlocked doors");
             this.hasEntered = true;
         }
-
     }
 
     @Override
-    public List<Location> getAvailableActions() {
-        return List.of(LocationRegistry.get("Tammy's Tavern"), LocationRegistry.get("The Broken Toe"));
+    public List<String> getAvailableActions() {
+        return List.of("Tammy's Tavern", "The Broken Toe");
     }
 }

@@ -19,5 +19,6 @@ public class Main {
         System.out.println();
         System.out.println("Whew! You now move towards the town");
         game.enterLocation(LocationRegistry.get("The Clearing Outpost"));
+        game.locationInteraction();
     }
 }

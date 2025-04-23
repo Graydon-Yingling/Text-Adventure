@@ -6,5 +6,5 @@ import java.util.List;
 public interface Location {
     String getLocationName();
     void enterLocation() throws InterruptedException;
-    List<Location> getAvailableActions();
+    List<String> getAvailableActions();
 }

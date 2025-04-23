@@ -2,6 +2,7 @@ import Armor.*;
 import Actors.*;
 import Healing.*;
 import Locations.Location;
+import Locations.LocationRegistry;
 import Weapons.*;
 import Effects.*;
 import Enemies.*;
@@ -205,10 +206,29 @@ public class Game {
 
     public void enterLocation(Location currentLocation) throws InterruptedException {
         this.currentLocation = currentLocation;
-        enter();
+        currentLocation.enterLocation();
     }
 
-    public void enter() throws InterruptedException {
-        currentLocation.enterLocation();
+    public void locationInteraction() throws InterruptedException {
+        List<String> options = currentLocation.getAvailableActions();
+
+        System.out.println();
+        System.out.println("Where would you like to go?: ");
+        for (int i = 0; i < options.size(); i++) {
+            System.out.println(" " + (i + 1) + ". " + options.get(i));
+        }
+        System.out.println();
+
+        int choice = -1;
+        if (input.hasNextInt()) {
+            choice = input.nextInt();
+            if (choice > 0 && choice <= options.size()) {
+                currentLocation = LocationRegistry.get(options.get(choice - 1));
+                currentLocation.enterLocation();
+            }else {
+                System.out.println();
+                System.out.println("Oops! Please enter a valid location...");
+            }
+        }
     }
 }

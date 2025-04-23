@@ -3,6 +3,7 @@ package Locations;
 import java.util.List;
 
 public class StartingTavern implements Location{
+
     boolean hasEntered = false;
 
     @Override
@@ -23,7 +24,7 @@ public class StartingTavern implements Location{
     }
 
     @Override
-    public List<Location> getAvailableActions() {
-        return List.of(LocationRegistry.get("The Clearing Outpost"));
+    public List<String> getAvailableActions() {
+        return List.of("The Clearing Outpost");
     }
 }
