@@ -173,6 +173,7 @@ public class Game {
                     }else {
                         System.out.println("Please enter a number...");
                         System.out.println();
+                        input.nextLine();
                     }
                 }
             }else if (currentEnemy.getSpeed() != 0){
@@ -220,14 +221,25 @@ public class Game {
         System.out.println();
 
         int choice = -1;
-        if (input.hasNextInt()) {
-            choice = input.nextInt();
-            if (choice > 0 && choice <= options.size()) {
-                currentLocation = LocationRegistry.get(options.get(choice - 1));
-                currentLocation.enterLocation();
+        while (choice < 0 || choice > options.size()) {
+            if (input.hasNextInt()) {
+                choice = input.nextInt();
+                if (choice > 0 && choice <= options.size()) {
+                    currentLocation = LocationRegistry.get(options.get(choice - 1));
+                    currentLocation.enterLocation();
+                }else {
+                    System.out.println();
+                    System.out.println("Oops! Please enter a valid location...");
+                    System.out.println();
+                    for (int i = 0; i < options.size(); i++) {
+                        System.out.println(" " + (i + 1) + ". " + options.get(i));
+                    }
+                    System.out.println();
+                }
             }else {
                 System.out.println();
-                System.out.println("Oops! Please enter a valid location...");
+                System.out.println("Oops! Please enter a number...");
+                input.nextLine();
             }
         }
     }
