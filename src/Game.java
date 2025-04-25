@@ -243,4 +243,6 @@ public class Game {
             }
         }
     }
+
+    public Actor getPlayer() {return this.player;}
 }

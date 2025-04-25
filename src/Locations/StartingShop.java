@@ -3,6 +3,8 @@ import Actors.Actor;
 import Armor.Armor;
 import Effects.HitEffect;
 import Healing.Healing;
+import Shops.DisplayShops;
+import Shops.InventoryItems;
 import Weapons.Weapon;
 
 import java.util.*;
@@ -10,9 +12,13 @@ import java.util.*;
 public class StartingShop implements Location{
     static Scanner input = new Scanner(System.in);
 
-    private final Map<Healing, Integer> shopHealingInventory = new HashMap<>();
-    private final Set<Weapon> shopWeaponInventory = new HashSet<>();
-    private final Set<Armor> shopArmorInventory = new HashSet<>();
+    private final Map<String, InventoryItems<Healing>> shopHealingInventory = new HashMap<>();
+    private final Map<String, Weapon> shopWeaponInventory = new HashMap<>();
+    private final Map<String, Armor> shopArmorInventory = new HashMap<>();
+
+    private final List<String> shopHealingList = new ArrayList<>();
+    private final List<String> shopWeaponList = new ArrayList<>();
+    private final List<String> shopArmorList = new ArrayList<>();
 
     boolean hasEntered = false;
 
@@ -42,7 +48,8 @@ public class StartingShop implements Location{
             if (input.hasNextInt()) {
                 choice = input.nextInt();
                 if (choice == 1) {
-                    shop();
+                    shop(player);
+                    choice = -1;
                 }else if (choice == 2) {
                     System.out.println();
                     System.out.println("You approach Axel...");
@@ -66,46 +73,23 @@ public class StartingShop implements Location{
         }
     }
 
-    private void shop() {
+    private void shop(Actor player) {
         System.out.println();
         System.out.println("You walk around the shop, taking a mental note of what's available...");
         System.out.println();
-        displayShop();
+        DisplayShops currentShop = new DisplayShops();
+        currentShop.shopInteraction(shopHealingList, shopWeaponList, shopArmorList, shopWeaponInventory, shopArmorInventory, shopHealingInventory, player);
     }
 
     {
-        shopHealingInventory.put(new Healing("Apple", 3, 1, 0), 8);
-        shopHealingInventory.put(new Healing("Cooked Meat", 5, 2, 0), 4);
-        shopHealingInventory.put(new Healing("Healing Potion", 7, 1, 1), 1);
+        shopHealingInventory.put("Healing Potion", new InventoryItems<>(new Healing("Healing Potion", 7, 1, 1), 2));
+        shopHealingList.add("Healing Potion");
 
-        shopWeaponInventory.add(new Weapon("Dagger", 2, new HitEffect("Bleed", 2, 0, 0, 0.2)));
+        shopWeaponInventory.put("Dagger", new Weapon("Dagger", 2, new HitEffect("Bleed", 2, 0, 0, 0.2)));
+        shopWeaponList.add("Dagger");
 
-        shopArmorInventory.add(new Armor("Leather Armor", 3));
-    }
-
-    private void displayShop() {
-        int count = 1;
-        System.out.println("Healing:");
-        for (Map.Entry<Healing, Integer> healing : this.shopHealingInventory.entrySet()) {
-            Healing entry = healing.getKey();
-            int num = healing.getValue();
-            System.out.println(" " + count + ". " + entry.name() + " x" + num + " - " + entry.healthGained() + " healing");
-            count++;
-        }
-        System.out.println();
-        System.out.println("Weapons:");
-        count = 1;
-        for (Weapon weapon : this.shopWeaponInventory) {
-            System.out.println(" " + count + ". " + weapon.name() + " - " + weapon.damage() + " damage");
-            count++;
-        }
-        System.out.println();
-        System.out.println("Armor:");
-        count = 1;
-        for (Armor armor : this.shopArmorInventory) {
-            System.out.println(" " + count + ". " + armor.name() + " - " + armor.armorPoints() + " armor");
-            count++;
-        }
+        shopArmorInventory.put("Leather Armor", new Armor("Leather Armor", 3));
+        shopArmorList.add("Leather Armor");
     }
 
     @Override
