@@ -54,42 +54,60 @@ public class DisplayShops {
 
         System.out.println();
         if (choice == 1) {
-            itemList = shopHealingList;
-            System.out.println("Healing:");
-            if (shopHealingInventory.isEmpty()) {
+            if (shopHealingInventory == null) {
+                itemList = null;
                 System.out.println();
-                System.out.println("Sorry! There are no healing items currently available.");
+                System.out.println("Sorry! This location doesn't carry healing items...");
             }else {
-                for (int i = 0; i < itemList.size(); i++) {
-                    String healName = itemList.get(i);
-                    InventoryItems<Healing> healItem = shopHealingInventory.get(healName);
-                    System.out.println(" " + (i + 1) + ". " + healName + " x" + healItem.getCount() + " - " + healItem.getItem().healthGained() + " healing");
+                itemList = shopHealingList;
+                System.out.println("Healing:");
+                if (shopHealingInventory.isEmpty()) {
+                    System.out.println();
+                    System.out.println("Sorry! There are no healing items currently available.");
+                } else {
+                    for (int i = 0; i < itemList.size(); i++) {
+                        String healName = itemList.get(i);
+                        InventoryItems<Healing> healItem = shopHealingInventory.get(healName);
+                        System.out.println(" " + (i + 1) + ". " + healName + " x" + healItem.getCount() + " - " + healItem.getItem().healthGained() + " healing");
+                    }
                 }
             }
         }else if (choice == 2) {
-            itemList = shopWeaponList;
-            System.out.println("Weapons:");
-            if (shopWeaponInventory.isEmpty()) {
+            if (shopWeaponInventory == null) {
+                itemList = null;
                 System.out.println();
-                System.out.println("Sorry! There are no weapons currently available.");
+                System.out.println("Sorry! This location doesn't have weapons...");
             }else {
-                for (int i = 0; i < itemList.size(); i++) {
-                    String weaponName = itemList.get(i);
-                    Weapon weapon = shopWeaponInventory.get(weaponName);
-                    System.out.println(" " + (i + 1) + ". " + weaponName + " - " + weapon.damage() + " damage");
+                itemList = shopWeaponList;
+                System.out.println("Weapons:");
+                if (shopWeaponInventory.isEmpty()) {
+                    System.out.println();
+                    System.out.println("Sorry! There are no weapons currently available.");
+                } else {
+                    for (int i = 0; i < itemList.size(); i++) {
+                        String weaponName = itemList.get(i);
+                        Weapon weapon = shopWeaponInventory.get(weaponName);
+                        System.out.println(" " + (i + 1) + ". " + weaponName + " - " + weapon.damage() + " damage");
+                    }
                 }
             }
         }else if (choice == 3 ) {
-            itemList = shopArmorList;
-            System.out.println("Armor:");
-            if (shopArmorInventory.isEmpty()) {
+            if (shopArmorInventory == null) {
+                itemList = null;
                 System.out.println();
-                System.out.println("Sorry! There are no armor sets currently available.");
+                System.out.println("Sorry! This location doesn't carry armor...");
             }else {
-                for (int i = 0; i < itemList.size(); i++) {
-                    String armorName = itemList.get(i);
-                    Armor armor = shopArmorInventory.get(armorName);
-                    System.out.println(" " + (i + 1) + ". " + armorName + " - " + armor.armorPoints() + " armor");
+                itemList = shopArmorList;
+                System.out.println("Armor:");
+                if (shopArmorInventory.isEmpty()) {
+                    System.out.println();
+                    System.out.println("Sorry! There are no armor sets currently available.");
+                } else {
+                    for (int i = 0; i < itemList.size(); i++) {
+                        String armorName = itemList.get(i);
+                        Armor armor = shopArmorInventory.get(armorName);
+                        System.out.println(" " + (i + 1) + ". " + armorName + " - " + armor.armorPoints() + " armor");
+                    }
                 }
             }
         }else {
@@ -97,13 +115,17 @@ public class DisplayShops {
             System.out.println("Oops! Please enter a valid number...");
             return;
         }
-        System.out.println(" " + (itemList.size() + 1) + ". Go back");
-        System.out.println();
-
+        if (itemList == null) {
+            return;
+        }else {
+            System.out.println(" " + (itemList.size() + 1) + ". Go back");
+            System.out.println();
+        }
         while (true) {
             if (input.hasNextInt()) {
-                System.out.println();
                 int itemChoice = input.nextInt();
+                input.nextLine();
+                System.out.println();
                 if (itemChoice == (itemList.size() + 1)) {
                     return;
                 }else if (itemChoice >= 1 && itemChoice <= itemList.size()) {

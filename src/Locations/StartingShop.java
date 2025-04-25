@@ -20,6 +20,17 @@ public class StartingShop implements Location{
     private final List<String> shopWeaponList = new ArrayList<>();
     private final List<String> shopArmorList = new ArrayList<>();
 
+    {
+        shopHealingInventory.put("Healing Potion", new InventoryItems<>(new Healing("Healing Potion", 7, 1, 1), 2));
+        shopHealingList.add("Healing Potion");
+
+        shopWeaponInventory.put("Dagger", new Weapon("Dagger", 2, new HitEffect("Bleed", 2, 0, 0, 0.2)));
+        shopWeaponList.add("Dagger");
+
+        shopArmorInventory.put("Leather Armor", new Armor("Leather Armor", 3));
+        shopArmorList.add("Leather Armor");
+    }
+
     boolean hasEntered = false;
 
     @Override
@@ -47,6 +58,7 @@ public class StartingShop implements Location{
             System.out.println();
             if (input.hasNextInt()) {
                 choice = input.nextInt();
+                input.nextLine();
                 if (choice == 1) {
                     shop(player);
                     choice = -1;
@@ -55,6 +67,8 @@ public class StartingShop implements Location{
                     System.out.println("You approach Axel...");
                     Thread.sleep(1200);
                     System.out.println("Axel: Gooday, sorry for the mostly empty shop, we don't get a lot of supply as of late, but let me know if you'd like to buy!");
+                    Thread.sleep(2000);
+                    System.out.println("Axel: Oh yeah, since my creator didn't have time to create currency, you can just take what you need!");
                     choice = -1;
                 }else if (choice == 3) {
                     System.out.println();
@@ -79,17 +93,6 @@ public class StartingShop implements Location{
         System.out.println();
         DisplayShops currentShop = new DisplayShops();
         currentShop.shopInteraction(shopHealingList, shopWeaponList, shopArmorList, shopWeaponInventory, shopArmorInventory, shopHealingInventory, player);
-    }
-
-    {
-        shopHealingInventory.put("Healing Potion", new InventoryItems<>(new Healing("Healing Potion", 7, 1, 1), 2));
-        shopHealingList.add("Healing Potion");
-
-        shopWeaponInventory.put("Dagger", new Weapon("Dagger", 2, new HitEffect("Bleed", 2, 0, 0, 0.2)));
-        shopWeaponList.add("Dagger");
-
-        shopArmorInventory.put("Leather Armor", new Armor("Leather Armor", 3));
-        shopArmorList.add("Leather Armor");
     }
 
     @Override

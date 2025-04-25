@@ -17,52 +17,59 @@ public class Game {
     private Location currentLocation;
 
     public void gameStart() {
-        System.out.println("Welcome to the Game!");
-        System.out.println();
-        System.out.println("Please Choose Your Starting Character by typing the corresponding number:");
-        System.out.println("1. Warrior");
-        System.out.println("2. Wizard");
-        System.out.println();
-
         Weapon weapon;
         Armor armor;
         Healing healing;
 
+        System.out.println();
+        System.out.println("Welcome to the Game!");
+        System.out.println();
+
         int choice = 0;
         while (choice != 1 && choice != 2) {
-            choice = input.nextInt();
+            System.out.println("Please Choose Your Starting Character by typing the corresponding number:");
+            System.out.println("1. Warrior");
+            System.out.println("2. Wizard");
+            System.out.println();
+            if (input.hasNextInt()){
+                choice = input.nextInt();
+                input.nextLine();
+                if (choice == 1) {
+                    player = new Actor("Warrior", 20, 80, 0);
+                    weapon = new Weapon("Long Sword", 5, new HitEffect("Armor Piercing", 2, 0, 0, 1.0));
+                    armor = new Armor("Iron Armor", 5);
+                    healing = new Healing("Cooked Meat", 5, 2, 0);
 
-            if (choice == 1) {
-                player = new Actor("Warrior", 20, 80, 0);
-                weapon = new Weapon("Long Sword", 5, new HitEffect("Armor Piercing", 2, 0, 0, 1.0));
-                armor = new Armor("Iron Armor", 5);
-                healing = new Healing("Cooked Meat", 5, 2, 0);
+                    player.addWeaponToInventory(weapon);
+                    player.addArmorToInventory(armor);
+                    player.addHealingToInventory(healing, 2);
 
-                player.addWeaponToInventory(weapon);
-                player.addArmorToInventory(armor);
-                player.addHealingToInventory(healing, 2);
+                    player.equipWeapon(weapon);
+                    player.equipArmor(armor);
+                }else if (choice == 2) {
+                    player = new Actor("Wizard", 15, 85, 0);
+                    weapon = new Weapon("Magic Staff", 6, new HitEffect("Stun", 0, 0, 100, 0.1));
+                    armor = new Armor("Cloak", 0);
+                    healing = new Healing("Healing Potion", 7, 1, 1);
 
-                player.equipWeapon(weapon);
-                player.equipArmor(armor);
-            }else if (choice == 2) {
-                player = new Actor("Wizard", 15, 85, 0);
-                weapon = new Weapon("Magic Staff", 6, new HitEffect("Stun", 0, 0, 100, 0.1));
-                armor = new Armor("Cloak", 0);
-                healing = new Healing("Healing Potion", 7, 1, 1);
+                    player.addWeaponToInventory(weapon);
+                    player.addArmorToInventory(armor);
+                    player.addHealingToInventory(healing, 2);
 
-                player.addWeaponToInventory(weapon);
-                player.addArmorToInventory(armor);
-                player.addHealingToInventory(healing, 2);
-
-                player.equipWeapon(weapon);
-                player.equipArmor(armor);
+                    player.equipWeapon(weapon);
+                    player.equipArmor(armor);
+                }else {
+                    System.out.println();
+                    System.out.println("Oops! Please type either a 1 or a 2");
+                    System.out.println();
+                    System.out.println("Please Choose Your Starting Character by typing the corresponding number:");
+                    System.out.println("1. Warrior");
+                    System.out.println("2. Wizard");
+                    System.out.println();
+                }
             }else {
-                System.out.println();
-                System.out.println("Oops! Please type either a 1 or a 2");
-                System.out.println();
-                System.out.println("Please Choose Your Starting Character by typing the corresponding number:");
-                System.out.println("1. Warrior");
-                System.out.println("2. Wizard");
+                input.nextLine();
+                System.out.println("Please enter a number...");
                 System.out.println();
             }
         }
@@ -88,14 +95,15 @@ public class Game {
 
         while (player.getHp() > 0 && currentEnemy.getHP() > 0) {
             if (playersTurn && player.getSpeed() != 0) {
-                System.out.println("Make your move!");
-                System.out.println(" 1. Attack");
-                System.out.println(" 2. Heal");
-                System.out.println();
                 int choice = 0;
                 while (choice != 1 && choice != 2) {
+                    System.out.println("Make your move!");
+                    System.out.println(" 1. Attack");
+                    System.out.println(" 2. Heal");
+                    System.out.println();
                     if (input.hasNextInt()) {
                         choice = input.nextInt();
+                        input.nextLine();
                         if (choice == 1) {
                             System.out.println();
                             System.out.println("You attack and deal " + player.getEquippedWeapon().damage() + " damage!");
@@ -122,9 +130,6 @@ public class Game {
                                 System.out.println();
                                 System.out.println("You have no healing items");
                                 choice = 0;
-                                System.out.println("Make your move!");
-                                System.out.println(" 1. Attack");
-                                System.out.println(" 2. Heal");
                                 System.out.println();
                                 continue;
                             }
@@ -132,9 +137,6 @@ public class Game {
                                 System.out.println();
                                 System.out.println("You're already at full health!");
                                 choice = 0;
-                                System.out.println("Make your move!");
-                                System.out.println(" 1. Attack");
-                                System.out.println(" 2. Heal");
                                 System.out.println();
                                 continue;
                             }
@@ -154,6 +156,7 @@ public class Game {
                             int healChoice = -1;
                             while (healChoice < 0 || healChoice > healingItems.size()) {
                                 healChoice = input.nextInt() - 1;
+                                input.nextLine();
                                 if (healChoice >= 0 && healChoice < healingItems.size()) {
                                     player.applyHealing(healingItems.get(healChoice));
                                 }else {
@@ -165,15 +168,11 @@ public class Game {
                         }else {
                             System.out.println("Oops! Please type either a 1 or a 2");
                             System.out.println();
-                            System.out.println("Make your move!");
-                            System.out.println(" 1. Attack");
-                            System.out.println(" 2. Heal");
-                            System.out.println();
                         }
                     }else {
-                        System.out.println("Please enter a number...");
-                        System.out.println();
                         input.nextLine();
+                        System.out.println("Please enter a number...");
+                        choice = 0;
                     }
                 }
             }else if (currentEnemy.getSpeed() != 0){

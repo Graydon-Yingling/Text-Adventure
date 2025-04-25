@@ -1,11 +1,26 @@
 package Locations;
 import Actors.Actor;
+import Armor.Armor;
+import Healing.Healing;
+import Shops.DisplayShops;
+import Shops.InventoryItems;
+import Weapons.Weapon;
 
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class StartingTavern implements Location{
     static Scanner input = new Scanner(System.in);
+
+    private final Map<String, InventoryItems<Healing>> shopHealingInventory = new HashMap<>();
+    private final List<String> shopHealingList = new ArrayList<>();
+
+    {
+        shopHealingInventory.put("Apple", new InventoryItems<>(new Healing("Apple", 3, 1, 0), 8));
+        shopHealingInventory.put("Cooked Meat", new InventoryItems<>(new Healing("Cooked Meat", 5, 2, 0), 4));
+
+        shopHealingList.add("Apple");
+        shopHealingList.add("Cooked Meat");
+    }
 
     boolean hasEntered = false;
 
@@ -37,13 +52,23 @@ public class StartingTavern implements Location{
             System.out.println();
             if (input.hasNextInt()) {
                 choice = input.nextInt();
+                input.nextLine();
                 if (choice == 1) {
-                    System.out.println();
+                    System.out.println("Tammy: Just remember, you can always rest to regain health and armor, and what you eat now won't be available to take later.");
+                    Thread.sleep(1200);
+                    System.out.println("Tammy: But here's the menu for ya!");
+                    eat(player);
+                    choice = -1;
                 }else if (choice == 2) {
                     System.out.println();
+                    System.out.println("Tammy: Here's what I've got in stock...");
+                    shop(player);
+                    choice = -1;
                 }else if (choice == 3) {
                     System.out.println();
                     System.out.println("Tammy: Hey there, not a lot of dining options, supply got cut off recently, but make yourself at home!");
+                    Thread.sleep(2000);
+                    System.out.println("Tammy: By the way, everything is free because my creator didn't add currency yet, so it's all you can eat!");
                     choice = -1;
                 }else if (choice == 4) {
                     System.out.println();
@@ -75,6 +100,58 @@ public class StartingTavern implements Location{
                 choice = -1;
             }
         }
+    }
+
+    public void eat(Actor player) {
+        List<String> itemList;
+        itemList = shopHealingList;
+        System.out.println("Food:");
+        if (shopHealingInventory.isEmpty()) {
+            System.out.println();
+            System.out.println("Tammy: Sorry! Out of stock....");
+            return;
+        } else {
+            for (int i = 0; i < itemList.size(); i++) {
+                String healName = itemList.get(i);
+                InventoryItems<Healing> healItem = shopHealingInventory.get(healName);
+                System.out.println(" " + (i + 1) + ". " + healName + " x" + healItem.getCount() + " - " + healItem.getItem().healthGained() + " healing");
+            }
+        }
+        System.out.println(" " + (itemList.size() + 1) + ". Go back");
+        System.out.println();
+        while (true) {
+            if (input.hasNextInt()) {
+                int itemChoice = input.nextInt();
+                input.nextLine();
+                System.out.println();
+                if (itemChoice == (itemList.size() + 1)) {
+                    return;
+                }else if (itemChoice >= 1 && itemChoice <= itemList.size()) {
+                    String itemName = itemList.get(itemChoice - 1);
+                    System.out.println();
+                    if (player.getHp() == player.getMaxHP()) {
+                        System.out.println();
+                        System.out.println("You don't need any more food right now, you're already at full health...");
+                        return;
+                    }else {
+                        player.addHealingToInventory(shopHealingInventory.get(itemName).getItem(), 1);
+                        player.applyHealing(shopHealingInventory.get(itemName).getItem());
+                        shopHealingInventory.get(itemName).setCount(shopHealingInventory.get(itemName).getCount() - 1);
+                        if (shopHealingInventory.get(itemName).getCount() == 0) {
+                            itemList.remove(itemChoice - 1);
+                            shopHealingInventory.remove(itemName);
+                        }
+                        return;
+                    }
+                }
+            }
+        }
+    }
+
+    public void shop(Actor player) {
+        DisplayShops currentShop = new DisplayShops();
+        System.out.println();
+        currentShop.shopInteraction(shopHealingList, null, null, null, null, shopHealingInventory, player);
     }
 
     @Override
