@@ -132,7 +132,6 @@ public class StartingTavern implements Location{
                     if (player.getHp() == player.getMaxHP()) {
                         System.out.println();
                         System.out.println("You don't need any more food right now, you're already at full health...");
-                        return;
                     }else {
                         player.addHealingToInventory(shopHealingInventory.get(itemName).getItem(), 1);
                         player.applyHealing(shopHealingInventory.get(itemName).getItem());
@@ -141,8 +140,17 @@ public class StartingTavern implements Location{
                             itemList.remove(itemChoice - 1);
                             shopHealingInventory.remove(itemName);
                         }
-                        return;
                     }
+                    return;
+                }
+            }else {
+                input.nextLine();
+                System.out.println("Please enter a number...");
+                System.out.println();
+                for (int i = 0; i < itemList.size(); i++) {
+                    String healName = itemList.get(i);
+                    InventoryItems<Healing> healItem = shopHealingInventory.get(healName);
+                    System.out.println(" " + (i + 1) + ". " + healName + " x" + healItem.getCount() + " - " + healItem.getItem().healthGained() + " healing");
                 }
             }
         }
