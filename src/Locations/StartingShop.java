@@ -10,7 +10,6 @@ import Weapons.Weapon;
 import java.util.*;
 
 public class StartingShop implements Location{
-    static Scanner input = new Scanner(System.in);
 
     private final Map<String, InventoryItems<Healing>> shopHealingInventory = new HashMap<>();
     private final Map<String, Weapon> shopWeaponInventory = new HashMap<>();
@@ -34,7 +33,7 @@ public class StartingShop implements Location{
     boolean hasEntered = false;
 
     @Override
-    public String getLocationName() {return "Broken Toe";}
+    public String getLocationName() {return "The Broken Toe";}
 
     @Override
     public void enterLocation(Actor player) throws InterruptedException {
@@ -48,45 +47,25 @@ public class StartingShop implements Location{
             this.hasEntered = true;
         }
 
-        int choice = -1;
-        while (choice < 1) {
-            System.out.println();
-            System.out.println("What will you do now?: ");
-            System.out.println(" 1. Shop");
-            System.out.println(" 2. Talk to Axel");
-            System.out.println(" 3. Inventory");
-            System.out.println(" 4. Leave");
-            System.out.println();
-            if (input.hasNextInt()) {
-                choice = input.nextInt();
-                input.nextLine();
-                if (choice == 1) {
-                    shop(player);
-                    choice = -1;
-                }else if (choice == 2) {
-                    System.out.println();
-                    System.out.println("You approach Axel...");
-                    Thread.sleep(1200);
-                    System.out.println("Axel: Gooday, sorry for the mostly empty shop, we don't get a lot of supply as of late, but let me know if you'd like to buy!");
-                    Thread.sleep(2000);
-                    System.out.println("Axel: Oh yeah, since my creator didn't have time to create currency, you can just take what you need!");
-                    choice = -1;
-                }else if (choice == 3) {
-                    player.inventoryInteraction();
-                    choice = -1;
-                }else if (choice == 4) {
-                    System.out.println();
-                    System.out.println("You leave the shop...");
-                    LocationRegistry.get("The Clearing Outpost").enterLocation(player);
-                }else {
-                    System.out.println();
-                    System.out.println("Oops! Please enter a valid number...");
-                    choice = -1;
-                }
-            }else {
-                input.nextLine();
+        LocationInteraction goTo = new LocationInteraction();
+        int choice = goTo.subInteract(LocationRegistry.get(getLocationName()));
+        while (true) {
+            if (choice == 1) {
+                shop(player);
+                choice = -1;
+            }else if (choice == 2) {
                 System.out.println();
-                System.out.println("Please enter a number...");
+                System.out.println("You approach Axel...");
+                Thread.sleep(1200);
+                System.out.println("Axel: Gooday, sorry for the mostly empty shop, we don't get a lot of supply as of late, but let me know if you'd like to buy!");
+                Thread.sleep(2000);
+                System.out.println("Axel: Oh yeah, since my creator didn't have time to create currency, you can just take what you need!");
+                choice = -1;
+            }else if (choice == 3) {
+                System.out.println();
+                System.out.println("You leave the shop...");
+                LocationRegistry.get("The Clearing Outpost").enterLocation(player);
+                return;
             }
         }
     }
@@ -101,6 +80,6 @@ public class StartingShop implements Location{
 
     @Override
     public List<String> getAvailableActions() {
-        return List.of("The Clearing Outpost");
+        return List.of("Shop", "Talk to Axel", "Leave");
     }
 }

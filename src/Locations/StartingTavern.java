@@ -38,68 +38,42 @@ public class StartingTavern implements Location{
             this.hasEntered = true;
         }
 
-        int choice = -1;
-        while (choice < 1) {
-            System.out.println();
-            System.out.println("What would you like to do?: ");
-            System.out.println(" 1. Dine in");
-            System.out.println(" 2. Take out");
-            System.out.println(" 3. Talk to Tammy");
-            System.out.println(" 4. Rest");
-            System.out.println(" 5. Inventory");
-            System.out.println(" 6. Leave");
-            System.out.println();
-            if (input.hasNextInt()) {
-                choice = input.nextInt();
-                input.nextLine();
-                if (choice == 1) {
-                    System.out.println("Tammy: Just remember, you can always rest to regain health and armor, and what you eat now won't be available to take later.");
-                    Thread.sleep(1200);
-                    System.out.println("Tammy: But here's the menu for ya!");
-                    eat(player);
-                    choice = -1;
-                }else if (choice == 2) {
-                    System.out.println();
-                    System.out.println("Tammy: Here's what I've got in stock...");
-                    shop(player);
-                    choice = -1;
-                }else if (choice == 3) {
-                    System.out.println();
-                    System.out.println("Tammy: Hey there, not a lot of dining options, supply got cut off recently, but make yourself at home!");
-                    Thread.sleep(2000);
-                    System.out.println("Tammy: By the way, everything is free because my creator didn't add currency yet, so it's all you can eat!");
-                    choice = -1;
-                }else if (choice == 4) {
-                    System.out.println();
-                    System.out.println("Tammy: Alrighty, here's a key, and your room will up be upstairs. See ya in the morning!");
-                    System.out.println();
-                    Thread.sleep(1000);
-                    System.out.println("You head to your room and sleep the night away...");
-                    player.setHp(player.getMaxHP());
-                    player.setArmorPoints(player.getEquippedArmor().armorPoints());
-                    Thread.sleep(4000);
-                    System.out.println();
-                    System.out.println("You're back downstairs now feeling rejuvenated...and your armor appears to have magically regenerated");
-                    System.out.println();
-                    Thread.sleep(1000);
-                    System.out.println("Tammy: Morning! Let me know what you need!");
-                    choice = -1;
-                }else if (choice == 5) {
-                    player.inventoryInteraction();
-                    choice = -1;
-                }else if (choice == 6) {
-                    System.out.println();
-                    System.out.println("You leave the tavern...");
-                    LocationRegistry.get("The Clearing Outpost").enterLocation(player);
-                }else {
-                    System.out.println();
-                    System.out.println("Oops! Please enter a valid number...");
-                }
-            }else {
-                input.nextLine();
+        LocationInteraction goTo = new LocationInteraction();
+        while (true) {
+            int choice = goTo.subInteract(LocationRegistry.get(getLocationName()));
+            if (choice == 1) {
+                System.out.println("Tammy: Just remember, you can always rest to regain health and armor, and what you eat now won't be available to take later.");
+                Thread.sleep(1200);
+                System.out.println("Tammy: But here's the menu for ya!");
+                eat(player);
+            }else if (choice == 2) {
                 System.out.println();
-                System.out.println("Please enter a number...");
-                choice = -1;
+                System.out.println("Tammy: Here's what I've got in stock...");
+                shop(player);
+            }else if (choice == 3) {
+                System.out.println();
+                System.out.println("Tammy: Hey there, not a lot of dining options, supply got cut off recently, but make yourself at home!");
+                Thread.sleep(2000);
+                System.out.println("Tammy: By the way, everything is free because my creator didn't add currency yet, so it's all you can eat!");
+            }else if (choice == 4) {
+                System.out.println();
+                System.out.println("Tammy: Alrighty, here's a key, and your room will up be upstairs. See ya in the morning!");
+                System.out.println();
+                Thread.sleep(1000);
+                System.out.println("You head to your room and sleep the night away...");
+                player.setHp(player.getMaxHP());
+                player.setArmorPoints(player.getEquippedArmor().armorPoints());
+                Thread.sleep(4000);
+                System.out.println();
+                System.out.println("You're back downstairs now feeling rejuvenated...and your armor appears to have magically regenerated");
+                System.out.println();
+                Thread.sleep(1000);
+                System.out.println("Tammy: Morning! Let me know what you need!");
+            }else if (choice == 5) {
+                System.out.println();
+                System.out.println("You leave the tavern...");
+                LocationRegistry.get("The Clearing Outpost").enterLocation(player);
+                return;
             }
         }
     }
@@ -166,6 +140,6 @@ public class StartingTavern implements Location{
 
     @Override
     public List<String> getAvailableActions() {
-        return List.of("The Clearing Outpost");
+        return List.of("Dine in", "Take Out", "Talk to Tammy", "Rest", "Leave");
     }
 }

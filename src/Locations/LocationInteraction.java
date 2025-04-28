@@ -24,6 +24,7 @@ public class LocationInteraction {
             System.out.println();
             if (input.hasNextInt()) {
                 choice = input.nextInt();
+                input.nextLine();
                 if (choice > 0 && choice <= options.size()) {
                     currentLocation = LocationRegistry.get(options.get(choice - 1));
                     currentLocation.enterLocation(player);
@@ -55,6 +56,7 @@ public class LocationInteraction {
             System.out.println();
             if (input.hasNextInt()) {
                 choice = input.nextInt();
+                input.nextLine();
                 if (choice > 0 && choice <= options.size()) {
                     return choice;
                 }else {
