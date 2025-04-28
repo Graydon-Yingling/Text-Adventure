@@ -28,6 +28,7 @@ public class StartingTown implements Location{
         int choice = -1;
         System.out.println();
         while (choice < 1) {
+            System.out.println();
             System.out.println("What would you like to do?");
             System.out.println(" 1. Tammy's Tavern");
             System.out.println(" 2. The Broken Toe");
@@ -36,6 +37,7 @@ public class StartingTown implements Location{
             System.out.println();
             if (input.hasNextInt()) {
                 choice = input.nextInt();
+                input.nextLine();
                 if (choice == 1) {
                     LocationRegistry.get("Tammy's Tavern").enterLocation(player);
                 }else if (choice == 2) {

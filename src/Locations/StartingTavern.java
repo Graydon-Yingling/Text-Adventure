@@ -78,7 +78,7 @@ public class StartingTavern implements Location{
                     Thread.sleep(1000);
                     System.out.println("You head to your room and sleep the night away...");
                     player.setHp(player.getMaxHP());
-                    player.setArmorPoints(player.getArmorPoints());
+                    player.setArmorPoints(player.getEquippedArmor().armorPoints());
                     Thread.sleep(4000);
                     System.out.println();
                     System.out.println("You're back downstairs now feeling rejuvenated...and your armor appears to have magically regenerated");
@@ -87,7 +87,7 @@ public class StartingTavern implements Location{
                     System.out.println("Tammy: Morning! Let me know what you need!");
                     choice = -1;
                 }else if (choice == 5) {
-                    System.out.println("NO INVENTORY INTERACTION YET");
+                    player.inventoryInteraction();
                     choice = -1;
                 }else if (choice == 6) {
                     System.out.println();

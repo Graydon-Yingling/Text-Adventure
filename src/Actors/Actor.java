@@ -73,6 +73,7 @@ public class Actor {
         }
 
         System.out.println("Gained " + (this.hp - before) + " health from " + healing.name());
+        System.out.println();
     }
 
     public void addWeaponToInventory(String name, Weapon weapon) {
@@ -94,6 +95,7 @@ public class Actor {
     public void equipWeapon(String name, Weapon weapon) {
         if (weaponInventory.containsKey(name) && (equippedWeapon == null || !equippedWeapon.equals(weapon))) {
             this.equippedWeapon = weapon;
+            System.out.println("You equipped " + name + "!");
         }else {
             System.out.println();
             System.out.println("You either already have this weapon equipped or do not own this weapon...");
@@ -104,6 +106,7 @@ public class Actor {
         if (armorInventory.containsKey(name) && (equippedArmor == null || !equippedArmor.equals(armor))) {
             this.equippedArmor = armor;
             this.armorPoints = armor.armorPoints();
+            System.out.println("You equipped " + name + "!");
         }else {
             System.out.println();
             System.out.println("You either already have this armor equipped or do not own this armor...");
@@ -182,21 +185,19 @@ public class Actor {
                         System.out.println();
                         String weapon = inventoryChoice.get(itemChoice);
                         equipWeapon(weapon, weaponInventory.get(weapon));
-                        System.out.println("You equipped " + weapon + "!");
                         break;
                     }else if (choice == 2) {
                         System.out.println();
                         String armor = inventoryChoice.get(itemChoice);
                         equipArmor(armor, armorInventory.get(armor));
-                        System.out.println("You equipped " + armor + "!");
                         break;
                     }else {
                         System.out.println();
                         String healItem = inventoryChoice.get(itemChoice);
                         Healing selectedHealing = null;
-                        for (Healing heal : healingInventory.keySet()) { // Solution from ChatGPT (My own understanding is that it creates a Set<Class>
-                            if (heal.name().equals(healItem)) {          // from the Map's keys and then accesses the class directly. It helps by not
-                                selectedHealing = heal;                  // making me need to reshape my healingInventory)
+                        for (Healing heal : healingInventory.keySet()) { // Solution from ChatGPT (My own understanding is that it creates a Set<Key>
+                            if (heal.name().equals(healItem)) {          // from the Map's keys and then accesses the key class directly. It helps by not
+                                selectedHealing = heal;                  // making me need to restructure my healingInventory)
                                 break;
                             }
                         }

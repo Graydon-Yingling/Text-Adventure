@@ -72,7 +72,7 @@ public class StartingShop implements Location{
                     System.out.println("Axel: Oh yeah, since my creator didn't have time to create currency, you can just take what you need!");
                     choice = -1;
                 }else if (choice == 3) {
-                    System.out.println("NO INVENTORY INTERACTION YET");
+                    player.inventoryInteraction();
                     choice = -1;
                 }else if (choice == 4) {
                     System.out.println();

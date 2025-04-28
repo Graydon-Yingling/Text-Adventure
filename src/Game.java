@@ -44,6 +44,9 @@ public class Game {
                     armorName = "Iron Armor";
                     healing = new Healing("Cooked Meat", 5, 2, 0);
 
+                    System.out.println();
+                    System.out.println("You have chosen " + player.getName() + "!");
+
                     player.addWeaponToInventory(weaponName, weapon);
                     player.addArmorToInventory(armorName, armor);
                     player.addHealingToInventory(healing, 2);
@@ -58,6 +61,9 @@ public class Game {
                     armorName = "Cloak";
                     healing = new Healing("Healing Potion", 7, 1, 1);
 
+                    System.out.println();
+                    System.out.println("You have chosen " + player.getName() + "!");
+
                     player.addWeaponToInventory(weaponName, weapon);
                     player.addArmorToInventory(armorName, armor);
                     player.addHealingToInventory(healing, 2);
@@ -68,10 +74,6 @@ public class Game {
                     System.out.println();
                     System.out.println("Oops! Please type either a 1 or a 2");
                     System.out.println();
-                    System.out.println("Please Choose Your Starting Character by typing the corresponding number:");
-                    System.out.println("1. Warrior");
-                    System.out.println("2. Wizard");
-                    System.out.println();
                 }
             }else {
                 input.nextLine();
@@ -79,13 +81,6 @@ public class Game {
                 System.out.println();
             }
         }
-
-        System.out.println();
-        System.out.println("You have chosen " + player.getName() + "!");
-        System.out.println();
-        System.out.println("Equipped Items: ");
-        System.out.println(" Weapon: " + player.getEquippedWeapon().name());
-        System.out.println(" Armor " + player.getEquippedArmor().name());
     }
 
     public void startFight(Enemy currentEnemy) {
@@ -245,6 +240,4 @@ public class Game {
             }
         }
     }
-
-    public Actor getPlayer() {return this.player;}
 }
