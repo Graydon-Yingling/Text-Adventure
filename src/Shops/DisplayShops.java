@@ -142,12 +142,12 @@ public class DisplayShops {
                         }
                         return;
                     }else if (choice == 2) {
-                        player.addWeaponToInventory(shopWeaponInventory.get(itemName));
+                        player.addWeaponToInventory(itemName, shopWeaponInventory.get(itemName));
                         shopWeaponInventory.remove(itemName);
                         itemList.remove(itemChoice - 1);
                         return;
                     }else {
-                        player.addArmorToInventory(shopArmorInventory.get(itemName));
+                        player.addArmorToInventory(itemName, shopArmorInventory.get(itemName));
                         shopArmorInventory.remove(itemName);
                         itemList.remove(itemChoice - 1);
                         return;

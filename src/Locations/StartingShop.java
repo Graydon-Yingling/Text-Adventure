@@ -54,7 +54,8 @@ public class StartingShop implements Location{
             System.out.println("What will you do now?: ");
             System.out.println(" 1. Shop");
             System.out.println(" 2. Talk to Axel");
-            System.out.println(" 3. Leave");
+            System.out.println(" 3. Inventory");
+            System.out.println(" 4. Leave");
             System.out.println();
             if (input.hasNextInt()) {
                 choice = input.nextInt();
@@ -71,6 +72,9 @@ public class StartingShop implements Location{
                     System.out.println("Axel: Oh yeah, since my creator didn't have time to create currency, you can just take what you need!");
                     choice = -1;
                 }else if (choice == 3) {
+                    System.out.println("NO INVENTORY INTERACTION YET");
+                    choice = -1;
+                }else if (choice == 4) {
                     System.out.println();
                     System.out.println("You leave the shop...");
                     LocationRegistry.get("The Clearing Outpost").enterLocation(player);

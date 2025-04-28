@@ -31,6 +31,8 @@ public class StartingTown implements Location{
             System.out.println("What would you like to do?");
             System.out.println(" 1. Tammy's Tavern");
             System.out.println(" 2. The Broken Toe");
+            System.out.println(" 3. Forest");
+            System.out.println(" 4. Inventory");
             System.out.println();
             if (input.hasNextInt()) {
                 choice = input.nextInt();
@@ -38,6 +40,12 @@ public class StartingTown implements Location{
                     LocationRegistry.get("Tammy's Tavern").enterLocation(player);
                 }else if (choice == 2) {
                     LocationRegistry.get("The Broken Toe").enterLocation(player);
+                }else if (choice == 3) {
+                    System.out.println("NO FOREST YET");
+                    choice = -1;
+                }else if (choice == 4) {
+                    player.inventoryInteraction();
+                    choice = -1;
                 }else {
                     System.out.println();
                     System.out.println("Oops! Please enter a valid number...");

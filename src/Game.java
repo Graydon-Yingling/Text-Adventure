@@ -18,7 +18,9 @@ public class Game {
 
     public void gameStart() {
         Weapon weapon;
+        String weaponName;
         Armor armor;
+        String armorName;
         Healing healing;
 
         System.out.println();
@@ -37,27 +39,31 @@ public class Game {
                 if (choice == 1) {
                     player = new Actor("Warrior", 20, 80, 0);
                     weapon = new Weapon("Long Sword", 5, new HitEffect("Armor Piercing", 2, 0, 0, 1.0));
+                    weaponName = "Long Sword";
                     armor = new Armor("Iron Armor", 5);
+                    armorName = "Iron Armor";
                     healing = new Healing("Cooked Meat", 5, 2, 0);
 
-                    player.addWeaponToInventory(weapon);
-                    player.addArmorToInventory(armor);
+                    player.addWeaponToInventory(weaponName, weapon);
+                    player.addArmorToInventory(armorName, armor);
                     player.addHealingToInventory(healing, 2);
 
-                    player.equipWeapon(weapon);
-                    player.equipArmor(armor);
+                    player.equipWeapon(weaponName, weapon);
+                    player.equipArmor(armorName, armor);
                 }else if (choice == 2) {
                     player = new Actor("Wizard", 15, 85, 0);
                     weapon = new Weapon("Magic Staff", 6, new HitEffect("Stun", 0, 0, 100, 0.1));
+                    weaponName = "Magic Staff";
                     armor = new Armor("Cloak", 0);
+                    armorName = "Cloak";
                     healing = new Healing("Healing Potion", 7, 1, 1);
 
-                    player.addWeaponToInventory(weapon);
-                    player.addArmorToInventory(armor);
+                    player.addWeaponToInventory(weaponName, weapon);
+                    player.addArmorToInventory(armorName, armor);
                     player.addHealingToInventory(healing, 2);
 
-                    player.equipWeapon(weapon);
-                    player.equipArmor(armor);
+                    player.equipWeapon(weaponName, weapon);
+                    player.equipArmor(armorName, armor);
                 }else {
                     System.out.println();
                     System.out.println("Oops! Please type either a 1 or a 2");
@@ -80,9 +86,6 @@ public class Game {
         System.out.println("Equipped Items: ");
         System.out.println(" Weapon: " + player.getEquippedWeapon().name());
         System.out.println(" Armor " + player.getEquippedArmor().name());
-        System.out.println();
-        System.out.println("Inventory:");
-        player.displayInventory();
     }
 
     public void startFight(Enemy currentEnemy) {

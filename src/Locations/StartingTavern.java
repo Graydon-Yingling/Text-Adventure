@@ -48,7 +48,8 @@ public class StartingTavern implements Location{
             System.out.println(" 2. Take out");
             System.out.println(" 3. Talk to Tammy");
             System.out.println(" 4. Rest");
-            System.out.println(" 5. Leave");
+            System.out.println(" 5. Inventory");
+            System.out.println(" 6. Leave");
             System.out.println();
             if (input.hasNextInt()) {
                 choice = input.nextInt();
@@ -86,6 +87,9 @@ public class StartingTavern implements Location{
                     System.out.println("Tammy: Morning! Let me know what you need!");
                     choice = -1;
                 }else if (choice == 5) {
+                    System.out.println("NO INVENTORY INTERACTION YET");
+                    choice = -1;
+                }else if (choice == 6) {
                     System.out.println();
                     System.out.println("You leave the tavern...");
                     LocationRegistry.get("The Clearing Outpost").enterLocation(player);
