@@ -10,6 +10,7 @@ public class LocationRegistry {
         locationData.put("The Clearing Outpost", new StartingTown());
         locationData.put("Tammy's Tavern", new StartingTavern());
         locationData.put("The Broken Toe", new StartingShop());
+        locationData.put("The Forest", new StartingForest());
     }
 
     public static Location get(String name) {return locationData.get(name);}

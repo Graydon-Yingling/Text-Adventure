@@ -1,10 +1,8 @@
 package Locations;
 import Actors.Actor;
-import Armor.Armor;
 import Healing.Healing;
 import Shops.DisplayShops;
 import Shops.InventoryItems;
-import Weapons.Weapon;
 
 import java.util.*;
 
