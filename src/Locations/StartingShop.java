@@ -36,6 +36,7 @@ public class StartingShop implements Location{
     public String getLocationName() {return "The Broken Toe";}
 
     @Override
+    @SuppressWarnings({"BusyWait"})
     public void enterLocation(Actor player) throws InterruptedException {
         if (hasEntered) {
             System.out.println();
@@ -52,7 +53,6 @@ public class StartingShop implements Location{
         while (true) {
             if (choice == 1) {
                 shop(player);
-                choice = -1;
             }else if (choice == 2) {
                 System.out.println();
                 System.out.println("You approach Axel...");
@@ -60,7 +60,6 @@ public class StartingShop implements Location{
                 System.out.println("Axel: Gooday, sorry for the mostly empty shop, we don't get a lot of supply as of late, but let me know if you'd like to buy!");
                 Thread.sleep(2000);
                 System.out.println("Axel: Oh yeah, since my creator didn't have time to create currency, you can just take what you need!");
-                choice = -1;
             }else if (choice == 3) {
                 System.out.println();
                 System.out.println("You leave the shop...");

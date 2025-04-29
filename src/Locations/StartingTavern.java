@@ -26,6 +26,7 @@ public class StartingTavern implements Location{
     public String getLocationName() {return "Tammy's Tavern";}
 
     @Override
+    @SuppressWarnings({"BusyWait"})
     public void enterLocation(Actor player) throws InterruptedException {
         if (hasEntered) {
             System.out.println();

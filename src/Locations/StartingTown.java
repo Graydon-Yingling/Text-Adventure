@@ -29,6 +29,6 @@ public class StartingTown implements Location{
 
     @Override
     public List<String> getAvailableActions() {
-        return List.of("Tammy's Tavern", "The Broken Toe", "The Forest");
+        return List.of("Tammy's Tavern", "The Broken Toe", "Forest Entrance");
     }
 }
