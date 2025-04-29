@@ -86,52 +86,51 @@ public class StartingTavern implements Location{
         if (shopHealingInventory.isEmpty()) {
             System.out.println();
             System.out.println("Tammy: Sorry! Out of stock....");
-            return;
         } else {
-            for (int i = 0; i < itemList.size(); i++) {
-                String healName = itemList.get(i);
-                InventoryItems<Healing> healItem = shopHealingInventory.get(healName);
-                System.out.println(" " + (i + 1) + ". " + healName + " x" + healItem.getCount() + " - " + healItem.getItem().healthGained() + " healing");
-            }
-        }
-        System.out.println(" " + (itemList.size() + 1) + ". Go back");
-        System.out.println();
-        while (true) {
-            if (input.hasNextInt()) {
-                int itemChoice = input.nextInt();
-                input.nextLine();
-                System.out.println();
-                if (itemChoice == (itemList.size() + 1)) {
-                    return;
-                }else if (itemChoice >= 1 && itemChoice <= itemList.size()) {
-                    String itemName = itemList.get(itemChoice - 1);
-                    System.out.println();
-                    if (player.getHp() == player.getMaxHP()) {
-                        System.out.println();
-                        System.out.println("You don't need any more food right now, you're already at full health...");
-                    }else {
-                        player.addHealingToInventory(shopHealingInventory.get(itemName).getItem(), 1);
-                        player.applyHealing(shopHealingInventory.get(itemName).getItem());
-                        shopHealingInventory.get(itemName).setCount(shopHealingInventory.get(itemName).getCount() - 1);
-                        if (shopHealingInventory.get(itemName).getCount() == 0) {
-                            itemList.remove(itemChoice - 1);
-                            shopHealingInventory.remove(itemName);
-                        }
-                    }
-                    return;
-                }
-            }else {
-                input.nextLine();
-                System.out.println("Please enter a number...");
-                System.out.println();
+            while (true) {
                 for (int i = 0; i < itemList.size(); i++) {
                     String healName = itemList.get(i);
                     InventoryItems<Healing> healItem = shopHealingInventory.get(healName);
                     System.out.println(" " + (i + 1) + ". " + healName + " x" + healItem.getCount() + " - " + healItem.getItem().healthGained() + " healing");
                 }
+                System.out.println(" " + (itemList.size() + 1) + ". Go back");
+                System.out.println();
+                if (input.hasNextInt()) {
+                    int itemChoice = input.nextInt();
+                    input.nextLine();
+                    System.out.println();
+                    if (itemChoice == (itemList.size() + 1)) {
+                        return;
+                    } else if (itemChoice >= 1 && itemChoice <= itemList.size()) {
+                        String itemName = itemList.get(itemChoice - 1);
+                        System.out.println();
+                        if (player.getHp() == player.getMaxHP()) {
+                            System.out.println();
+                            System.out.println("You don't need any more food right now, you're already at full health...");
+                        } else {
+                            player.addHealingToInventory(shopHealingInventory.get(itemName).getItem(), 1);
+                            player.applyHealing(shopHealingInventory.get(itemName).getItem());
+                            shopHealingInventory.get(itemName).setCount(shopHealingInventory.get(itemName).getCount() - 1);
+                            if (shopHealingInventory.get(itemName).getCount() == 0) {
+                                itemList.remove(itemChoice - 1);
+                                shopHealingInventory.remove(itemName);
+                            }
+                        }
+                        return;
+                    } else {
+                        System.out.println();
+                        System.out.println("Oops! Please enter a valid number");
+                        System.out.println();
+                    }
+                } else {
+                    input.nextLine();
+                    System.out.println("Please enter a number...");
+                    System.out.println();
+                }
             }
         }
     }
+
 
     public void shop(Actor player) {
         DisplayShops currentShop = new DisplayShops();

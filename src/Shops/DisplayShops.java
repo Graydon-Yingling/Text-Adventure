@@ -131,25 +131,43 @@ public class DisplayShops {
                 }else if (itemChoice >= 1 && itemChoice <= itemList.size()) {
                     String itemName = itemList.get(itemChoice - 1);
                     System.out.println();
-                    System.out.println("You added 1 " + itemName + " to your inventory!");
 
                     if (choice == 1) {
-                        player.addHealingToInventory(shopHealingInventory.get(itemName).getItem(), 1);
-                        shopHealingInventory.get(itemName).setCount(shopHealingInventory.get(itemName).getCount() - 1);
-                        if (shopHealingInventory.get(itemName).getCount() == 0) {
-                            itemList.remove(itemChoice - 1);
-                            shopHealingInventory.remove(itemName);
+                        int count;
+                        while(true) {
+                            System.out.println("How many would you like?");
+                            System.out.println();
+                            if (input.hasNextInt()) {
+                                count = input.nextInt();
+                                input.nextLine();
+                                if (count > 0 && count <= shopHealingInventory.get(itemName).getCount()) {
+                                    player.addHealingToInventory(shopHealingInventory.get(itemName).getItem(), count);
+                                    shopHealingInventory.get(itemName).setCount(shopHealingInventory.get(itemName).getCount() - count);
+                                    if (shopHealingInventory.get(itemName).getCount() == 0) {
+                                        itemList.remove(itemChoice - 1);
+                                        shopHealingInventory.remove(itemName);
+                                    }
+                                    return;
+                                }else {
+                                    System.out.println();
+                                    System.out.println("Oops! Please enter a valid number...");
+                                }
+                            }else {
+                                System.out.println();
+                                System.out.println("Please enter a number...");
+                            }
                         }
-                        return;
                     }else if (choice == 2) {
                         player.addWeaponToInventory(itemName, shopWeaponInventory.get(itemName));
                         shopWeaponInventory.remove(itemName);
                         itemList.remove(itemChoice - 1);
+                        System.out.println("You added " + itemName + " to your inventory!");
                         return;
                     }else {
                         player.addArmorToInventory(itemName, shopArmorInventory.get(itemName));
                         shopArmorInventory.remove(itemName);
                         itemList.remove(itemChoice - 1);
+                        System.out.println("You added " + itemName + " to your inventory!");
                         return;
                     }
                 }else {

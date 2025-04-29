@@ -49,8 +49,8 @@ public class StartingShop implements Location{
         }
 
         LocationInteraction goTo = new LocationInteraction();
-        int choice = goTo.subInteract(LocationRegistry.get(getLocationName()));
         while (true) {
+            int choice = goTo.subInteract(LocationRegistry.get(getLocationName()));
             if (choice == 1) {
                 shop(player);
             }else if (choice == 2) {
@@ -75,6 +75,7 @@ public class StartingShop implements Location{
         System.out.println();
         DisplayShops currentShop = new DisplayShops();
         currentShop.shopInteraction(shopHealingList, shopWeaponList, shopArmorList, shopWeaponInventory, shopArmorInventory, shopHealingInventory, player);
+        return;
     }
 
     @Override
