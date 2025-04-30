@@ -8,7 +8,7 @@ import Weapons.Weapon;
 public class LootItem<Item> {
     private final String name;
     private final Item item;
-    private int count;
+    private final int count;
 
     public LootItem(String name, Item item, int count) {
         this.name = name;
@@ -28,9 +28,5 @@ public class LootItem<Item> {
 
     public String getName() {return name;}
 
-    public Item getItem() {return item;}
-
     public int getCount() {return count;}
-
-    public void setCount(int count) {this.count = count;}
 }

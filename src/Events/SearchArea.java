@@ -111,7 +111,7 @@ public class SearchArea {
 
         for (int i = 0; i < height; i++) {
             System.out.println();
-            for (int k = 0; k < height; k++) {
+            for (int k = 0; k < length; k++) {
                 System.out.print("   -   ");
             }
             System.out.println();
@@ -120,7 +120,7 @@ public class SearchArea {
             }
         }
         System.out.println();
-        for (int k = 0; k < height; k++) {
+        for (int k = 0; k < length; k++) {
             System.out.print("   -   ");
         }
         System.out.println();

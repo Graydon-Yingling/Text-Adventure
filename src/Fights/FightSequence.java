@@ -3,6 +3,7 @@ package Fights;
 import Actors.Actor;
 import Enemies.Enemy;
 import Healing.Healing;
+import Shops.InventoryItems;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,11 +67,12 @@ public class FightSequence {
                             System.out.println();
                             List<Healing> healingItems = new ArrayList<>();
                             int num = 0;
-                            for (Map.Entry<Healing, Integer> healing : player.getHealingInventory().entrySet()) {
-                                Healing entry = healing.getKey();
-                                int count = healing.getValue();
-                                System.out.println(" " + (num + 1) + ". " + entry.name() + " x" + count);
-                                healingItems.add(entry);
+                            for (Map.Entry<String, InventoryItems<Healing>> healing : player.getHealingInventory().entrySet()) {
+                                InventoryItems<Healing> entry = healing.getValue();
+                                Healing item = entry.getItem();
+                                int count = entry.getCount();
+                                System.out.println(" " + (num + 1) + ". " + item.name() + " x" + count);
+                                healingItems.add(item);
                                 num++;
                             }
 

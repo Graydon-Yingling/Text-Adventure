@@ -75,7 +75,6 @@ public class StartingShop implements Location{
         System.out.println();
         DisplayShops currentShop = new DisplayShops();
         currentShop.shopInteraction(shopHealingList, shopWeaponList, shopArmorList, shopWeaponInventory, shopArmorInventory, shopHealingInventory, player);
-        return;
     }
 
     @Override

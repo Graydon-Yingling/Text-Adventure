@@ -2,8 +2,8 @@ package Actors;
 
 import Armor.Armor;
 import Effects.HitEffect;
-import Events.LootItem;
 import Healing.Healing;
+import Shops.InventoryItems;
 import Weapons.Weapon;
 
 import java.util.*;
@@ -23,7 +23,7 @@ public class Actor {
 
     private final Map<String, Weapon> weaponInventory = new HashMap<>();
     private final Map<String, Armor> armorInventory = new HashMap<>();
-    private final Map<Healing, Integer> healingInventory = new HashMap<>();
+    private final Map<String, InventoryItems<Healing>> healingInventory = new HashMap<>();
 
     private final List<String> weaponNames = new ArrayList<>();
     private final List<String> armorNames = new ArrayList<>();
@@ -47,7 +47,9 @@ public class Actor {
     }
 
     public void applyHealing(Healing healing) {
-        if (healingInventory.getOrDefault(healing, 0) <= 0) {
+        String healName = healing.name();
+
+        if (!healingInventory.containsKey(healName)) {
             System.out.println();
             System.out.println("You don't have this healing item");
             return;
@@ -65,15 +67,16 @@ public class Actor {
             this.hp = maxHP;
         }
 
-        int remaining = healingInventory.get(healing) - 1;
+        InventoryItems<Healing> item = healingInventory.get(healName);
+        int remaining = item.getCount() - 1;
         if (remaining <= 0) {
-            healingInventory.remove(healing);
-            healingNames.remove(healing.name());
+            healingInventory.remove(healName);
+            healingNames.remove(healName);
         } else {
-            healingInventory.put(healing, remaining);
+            item.setCount(remaining);
         }
 
-        System.out.println("Gained " + (this.hp - before) + " health from " + healing.name());
+        System.out.println("Gained " + (this.hp - before) + " health from " + healName);
         System.out.println();
     }
 
@@ -88,8 +91,16 @@ public class Actor {
     }
 
     public void addHealingToInventory (Healing heal, int amnt) {
-        int current = healingInventory.getOrDefault(heal, 0); // getOrDefault() method comes from ChatGPT
-        healingInventory.put(heal, current + amnt);
+        String name = heal.name();
+
+        //If-Else block came from ChatGPT because it was a last minute change
+        if (healingInventory.containsKey(name)) {
+            InventoryItems<Healing> existing = healingInventory.get(name);
+            existing.setCount(existing.getCount() + amnt);
+        } else {
+            healingInventory.put(name, new InventoryItems<>(heal, amnt));
+        }
+
         if (!healingNames.contains(heal.name())) {
             healingNames.add(heal.name());
         }
@@ -134,10 +145,8 @@ public class Actor {
             inventoryChoice = armorNames;
         }else if (choice == 3) {
             System.out.println(" - Healing Items:");
-            for (Map.Entry<Healing, Integer> healing : this.getHealingInventory().entrySet()) {
-                Healing entry = healing.getKey();
-                int healCount = healing.getValue();
-                System.out.println("  " + count + ". " + entry.name() + " x" + healCount);
+            for (String healName : healingNames) {
+                System.out.println("  " + count + ". " + healName + " x" + healingInventory.get(healName).getCount() + " - " + healingInventory.get(healName).getItem().healthGained() + " healing");
                 count++;
             }
             inventoryChoice = healingNames;
@@ -187,9 +196,9 @@ public class Actor {
                                     System.out.println();
                                     String healItem = inventoryChoice.get(itemChoice);
                                     Healing selectedHealing = null;
-                                    for (Healing heal : healingInventory.keySet()) { // Solution from ChatGPT (My own understanding is that it creates a Set<Key>
-                                        if (heal.name().equals(healItem)) {          // from the Map's keys and then accesses the key class directly. It helps by not
-                                            selectedHealing = heal;                  // making me need to restructure my healingInventory)
+                                    for (String heal : healingNames) {
+                                        if (heal.equals(healItem)) {
+                                            selectedHealing = healingInventory.get(heal).getItem();
                                             break;
                                         }
                                     }
@@ -240,15 +249,7 @@ public class Actor {
         return equippedArmor;
     }
 
-    public Map<String, Weapon> getWeaponInventory() {
-        return weaponInventory;
-    }
-
-    public Map<String, Armor> getArmorInventory() {
-        return armorInventory;
-    }
-
-    public Map<Healing, Integer> getHealingInventory() {
+    public Map<String, InventoryItems<Healing>> getHealingInventory() {
         return healingInventory;
     }
 
