@@ -1,12 +1,26 @@
 package Locations;
 
 import Actors.Actor;
+import Armor.Armor;
+import Enemies.Beast;
+import Enemies.Dragon;
+import Enemies.Enemy;
 import Enemies.Undead;
+import Events.LootItem;
+import Events.SearchArea;
 import Fights.FightSequence;
+import Healing.Healing;
+import Shops.InventoryItems;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class StartingForest implements Location {
+    static Scanner input = new Scanner(System.in);
+
+    public List<LootItem<?>> possibleItems = new ArrayList<>();
+    public  List<Enemy> possibleEnemies = new ArrayList<>();
 
     boolean hasEntered;
 
@@ -15,6 +29,15 @@ public class StartingForest implements Location {
 
     @Override
     public void enterLocation(Actor player) throws InterruptedException {
+        {
+            possibleItems.add(new LootItem<>("Great Healing Potion", new Healing("Great Healing Potion", player.getMaxHP() / 2, 0, 2), 1));
+            possibleItems.add(new LootItem<>("Iron Armor", new Armor("Iron Armor", 5), 1));
+
+            possibleEnemies.add(new Beast("Wolf", 12, 2, 90));
+            possibleEnemies.add(new Undead("Hound", 10, 1, 2, 80));
+            possibleEnemies.add(new Dragon("Hatchling", 8, 3, 75));
+        }
+
         if (hasEntered) {
             System.out.println();
             System.out.println("You travel back into the hear of a now-quiet forest...");
@@ -30,11 +53,35 @@ public class StartingForest implements Location {
             nextFight.fight(player, new Undead("Hound", 25, 1, 4, 80));
             hasEntered = true;
         }
-
+        int choice;
+        while (true) {
+            System.out.println();
+            System.out.println("Would you like to search the area for loot...and potentially something less desirable?");
+            System.out.println(" 1. Yes, take the risk");
+            System.out.println(" 2. No, continue on");
+            if (input.hasNextInt()) {
+                choice = input.nextInt();
+                if (choice == 1) {
+                    SearchArea area = new SearchArea(player, possibleEnemies.get((int) (Math.random() * possibleEnemies.size())),
+                                                     possibleItems.get((int) (Math.random() * possibleItems.size())),
+                                              4, 3, 2, 0);
+                    area.search();
+                    break;
+                }else if (choice == 2) {
+                    break;
+                }else {
+                    System.out.println();
+                    System.out.println("Oops! PLease enter a valid number...");
+                }
+            }else {
+                System.out.println();
+                System.out.println("Please enter a number...");
+            }
+        }
         LocationInteraction goTo = new LocationInteraction();
         goTo.mainInteract(LocationRegistry.get(getLocationName()), player);
     }
 
     @Override
-    public List<String> getAvailableActions() {return List.of("DONE");}
+    public List<String> getAvailableActions() {return List.of("The Clearing Outpost");}
 }

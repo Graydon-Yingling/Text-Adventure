@@ -1,40 +1,61 @@
 package Events;
 
 import Actors.Actor;
+import Enemies.Enemy;
+import Fights.FightSequence;
 
 import java.util.Scanner;
 
 public class SearchArea {
     static Scanner input = new Scanner(System.in);
 
-    private Actor player;
+    private final Actor player;
+    Enemy currentEnemy;
+    LootItem<?> item;
     private int playerX;
     private int playerY;
-    private int length;
-    private int height;
-    private int enemies;
-    private int lootItems;
+    private final int length;
+    private final int height;
+    private int enemyX;
+    private int enemyY;
+    private int lootItemX;
+    private int lootItemY;
 
-    public SearchArea(Actor player, int length, int height, int enemies, int lootItems, int playerX, int playerY) {
+    public SearchArea(Actor player, Enemy currentEnemy, LootItem<?> item, int length, int height, int playerX, int playerY) {
         this.player = player;
+        this.currentEnemy = currentEnemy;
+        this.item = item;
         this.playerX = playerX;
         this.playerY = playerY;
         this.length = length;
         this.height = height;
-        this.enemies = enemies;
-        this.lootItems = lootItems;
+        do {
+            this.enemyX = (int) (Math.random() * length);
+            this.enemyY = (int) (Math.random() * height);
+        } while (enemyX == playerX && enemyY == playerY);
+
+        do {
+            this.lootItemX = (int) (Math.random() * length);
+            this.lootItemY = (int) (Math.random() * height);
+        } while (
+                (lootItemX == enemyX && lootItemY == enemyY) ||
+                (lootItemX == playerX && lootItemY == playerY)
+        );
     }
 
-    public void search() {
+    @SuppressWarnings({"BusyWait"})
+    public void search() throws InterruptedException {
+        displayArea();
         int choice;
         while (true) {
-            displayArea();
             System.out.println();
             System.out.println("Where would you like to go?:");
             System.out.println(" 1. Up");
             System.out.println(" 2. Down");
             System.out.println(" 3. Left");
             System.out.println(" 4. Right");
+            System.out.println(" 5. Stop Searching");
+            System.out.println();
             if (input.hasNextInt()) {
                 choice = input.nextInt();
                 if (choice == 1 && playerY > 0) {
@@ -45,6 +66,11 @@ public class SearchArea {
                     playerX--;
                 }else if (choice == 4 && playerX < length - 1) {
                     playerX++;
+                }else if (choice == 5) {
+                    System.out.println();
+                    System.out.println("You stop searching and return to your travels");
+                    Thread.sleep(1500);
+                    return;
                 }else {
                     System.out.println("Oops! You are not able to make that move...");
                 }
@@ -52,6 +78,20 @@ public class SearchArea {
                 input.nextLine();
                 System.out.println();
                 System.out.println("Please enter a number...");
+            }
+            displayArea();
+            if (playerX == enemyX && playerY == enemyY) {
+                System.out.println();
+                System.out.println("An enemy jumps out at you!");
+                System.out.println();
+                FightSequence nextFight = new FightSequence();
+                nextFight.fight(player, currentEnemy);
+                displayArea();
+            }else if (playerX == lootItemX && playerY == lootItemY) {
+                System.out.println();
+                item.AddItemToInventory(player, item.getCount());
+                System.out.println("You added " + item.getName() + " to your inventory!");
+                displayArea();
             }
         }
     }
@@ -85,6 +125,4 @@ public class SearchArea {
         }
         System.out.println();
     }
-
-    private void setPlayerX(int playerX) {this.playerX = playerX;}
 }

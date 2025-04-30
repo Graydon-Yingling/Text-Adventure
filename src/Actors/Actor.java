@@ -2,6 +2,7 @@ package Actors;
 
 import Armor.Armor;
 import Effects.HitEffect;
+import Events.LootItem;
 import Healing.Healing;
 import Weapons.Weapon;
 
@@ -89,7 +90,9 @@ public class Actor {
     public void addHealingToInventory (Healing heal, int amnt) {
         int current = healingInventory.getOrDefault(heal, 0); // getOrDefault() method comes from ChatGPT
         healingInventory.put(heal, current + amnt);
-        healingNames.add(heal.name());
+        if (!healingNames.contains(heal.name())) {
+            healingNames.add(heal.name());
+        }
     }
 
     public void equipWeapon(String name, Weapon weapon) {
