@@ -89,4 +89,6 @@ public class Game {
     public void enterLocation(Location currentLocation) throws InterruptedException {
         currentLocation.enterLocation(this.player);
     }
+
+    public Actor getPlayer() {return this.player;}
 }
