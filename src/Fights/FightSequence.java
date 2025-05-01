@@ -16,7 +16,7 @@ public class FightSequence {
     public void fight(Actor player, Enemy currentEnemy) {
         boolean playersTurn = player.getSpeed() >= currentEnemy.getSpeed();
 
-        while (player.getHp() > 0 && currentEnemy.getHP() > 0) {
+        while (true) {
             if (playersTurn && player.getSpeed() != 0) {
                 int choice = 0;
                 while (choice != 1 && choice != 2) {
@@ -47,7 +47,12 @@ public class FightSequence {
                                 System.out.println();
                             }
                             System.out.println();
-                            System.out.println("The " + currentEnemy.getName() + " now has " + currentEnemy.getArmorPoints() + " armor and " + currentEnemy.getHP() + " HP!");
+                            if (currentEnemy.getHP() <= 0) {
+                                System.out.println("You killed the enemy!");
+                                return;
+                            }else {
+                                System.out.println("The " + currentEnemy.getName() + " now has " + currentEnemy.getArmorPoints() + " armor and " + currentEnemy.getHP() + " HP!");
+                            }
                         } else if (choice == 2) {
                             if (player.getHealingInventory().isEmpty()) {
                                 System.out.println();
@@ -119,8 +124,13 @@ public class FightSequence {
                     System.out.println(currentEnemy.getName() + " inflicted " + currentEnemy.getEffect().name() + "!");
                     System.out.println();
                 }
-                System.out.println("You now have " + player.getArmorPoints() + " armor and " + player.getHp() + " HP!");
-                System.out.println();
+                if (player.getHp() <= 0) {
+                    System.out.println("You Died");
+                    System.exit(0);
+                }else {
+                    System.out.println("You now have " + player.getArmorPoints() + " armor and " + player.getHp() + " HP!");
+                    System.out.println();
+                }
             }
             playersTurn = !playersTurn;
             player.setSpeed(player.getMaxSpeed());
